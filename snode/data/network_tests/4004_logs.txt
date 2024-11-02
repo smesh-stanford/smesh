@@ -18381,3 +18381,22 @@ environment_metrics {
   iaq: 51
 }
 }]
+['2024-11-02 12:15:09.436225', '0x4358fbec', {'time': 1730574872, 'environmentMetrics': {'temperature': 27.61678, 'relativeHumidity': 32.4067, 'barometricPressure': 1011.951, 'gasResistance': 515.4795, 'iaq': 51}, 'raw': time: 1730574872
+environment_metrics {
+  temperature: 27.6167793
+  relative_humidity: 32.4067
+  barometric_pressure: 1011.95099
+  gas_resistance: 515.479492
+  iaq: 51
+}
+}]
+['2024-11-02 12:15:11.068855', '0x4358fbec', {'time': 1730574875, 'airQualityMetrics': {'pm10Standard': 57, 'pm25Standard': 57, 'pm100Standard': 57, 'pm10Environmental': 41, 'pm25Environmental': 49, 'pm100Environmental': 57}, 'raw': time: 1730574875
+air_quality_metrics {
+  pm10_standard: 57
+  pm25_standard: 57
+  pm100_standard: 57
+  pm10_environmental: 41
+  pm25_environmental: 49
+  pm100_environmental: 57
+}
+}]
