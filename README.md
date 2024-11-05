@@ -74,21 +74,21 @@ ___
     ```
     sudo apt install python3-pip
     ```
-3. Install required dependencies:
-    ```
-    pip3 install pandas==1.4.4 pytap2==2.3.0 meshtastic==2.3.14 google-auth google-auth-oauthlib google-api-python-client
-    ```
-4. Install **Git**:
+3. Install **Git**:
     ```
     sudo apt install git -y
     ```
-5. Clone the project's GitHub repository:
+4. Clone the project's GitHub repository:
     ```
     git clone https://github.com/smesh-stanford/smesh.git
     ```
-6. Navigate to the `snode` directory:
+5. Navigate to the `snode` directory:
     ```
     cd ./smesh/snode
+    ```
+6. Install required dependencies:
+    ```
+    pip3 install -r requirements.txt
     ```
 7. Create a data directory:
     ```
