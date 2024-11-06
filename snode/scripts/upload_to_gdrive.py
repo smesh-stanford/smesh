@@ -20,13 +20,30 @@ def upload_files(folder_path, drive_folder_id=None):
     for filename in os.listdir(folder_path):
         file_path = os.path.join(folder_path, filename)
         if os.path.isfile(file_path):
-            print(f'Uploading {filename}...')
-            file_metadata = {'name': filename}
+            # Build the query to search for existing files
+            query = f"mimeType != 'application/vnd.google-apps.folder' and name = '{filename}' and trashed = false"
             if drive_folder_id:
-                file_metadata['parents'] = [drive_folder_id]
+                query += f" and '{drive_folder_id}' in parents"
+            
+            # Search for the file
+            response = service.files().list(q=query, spaces='drive', fields='files(id, name)').execute()
+            files = response.get('files', [])
+            
             media = MediaFileUpload(file_path, resumable=True)
-            service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-            print(f'{filename} uploaded successfully.')
+            
+            if files:
+                # File exists, update it
+                file_id = files[0]['id']
+                print(f'File {filename} exists. Updating...')
+                updated_file = service.files().update(fileId=file_id, media_body=media).execute()
+                print(f'{filename} updated successfully.')
+            else:
+                print(f'Uploading {filename}...')
+                file_metadata = {'name': filename}
+                if drive_folder_id:
+                    file_metadata['parents'] = [drive_folder_id]
+                service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+                print(f'{filename} uploaded successfully.')
 
 if __name__ == '__main__':
     # Replace 'your/local/folder/path' with the path to your local folder
