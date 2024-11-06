@@ -82,39 +82,49 @@ ___
     ```
     git clone https://github.com/smesh-stanford/smesh.git
     ```
-5. Navigate to the `snode` directory:
+5. Open a different Terminal and upload the `credential.json` file from your own local directory to the Raspberry Pi by entering the command:
+    ```
+    scp /local/path/to/credentials.json pi@smeshX.local: /home/pi/smesh/snode
+    ```
+    (e.g. if the credentials.json file is stored in your local Downloads directory: `scp ~/Downloads/credentials.json pi@smeshX.local: /home/pi/smesh/snode` , where X in smeshX represents the number of the current system).
+6. Once the upload has been completed, close this Terminal and go back to the previous one (where the SSH connection to the Raspberry Pi was established).
+7. Navigate to the `snode` directory:
     ```
     cd ./smesh/snode
     ```
-6. Install required dependencies:
+8. Install required dependencies:
     ```
     pip3 install -r requirements.txt
     ```
-7. Create a data directory:
+9. Create a data directory:
     ```
     mkdir data
     ```
-8. Give execute permissions to the script **start_read_aqi.sh**:
+10. In its default stage, the code will store any upcoming data packet to this data directory (absolute path: `/home/pi/smesh/snode/data`). In some cases, the user may want to change the name of the data directory to help with data management. In such case, the path to the data directory needs to be changed in the **read_aqi.py, start_read_aqi.sh** and **upload_to_gdrive.py** scripts located in `/smesh/snode/scripts`:
+    - **read_aqi.py:** From line 46 - 76, all the path arguments in the **log_to_csv()** function need to be changed to the new data directory path. For instance, if the user created a different data directory named *data_pepperwood*, all path arugments in the log_to_csv() function would be changed to: `f’/home/pi/smesh/snode/**data_pepperwood**/{nodeid}_bme688.csv’`
+    - **start_read_aqi.sh:** Line 7, Change the path in the last line from `~/smesh/snode/**data**/read_aqi_stdouterr_log.txt` to the new data directory path (e.g., `~/smesh/snode/**data_pepperwood**/read_aqi_stdouterr_log.txt`)
+    - **uploading_to_gdrive.py:** Change the path in ****Line 33 in the main function, to the new data directory path (e.g. `'/home/pi/smesh/snode/**data_pepperwood'**`)
+11. Give execute permissions to the script **start_read_aqi.sh**:
     ```
     chmod +x ~/smesh/snode/scripts/start_read_aqi.sh
     ```
-9. Open the cron table editor:
+12. Open the cron table editor:
     ```
     crontab -e
     ```
-10. Enter `1` to select the **nano** text editor.
-11. Scroll to the bottom and add the following two lines (the number `5` in the second line indicates the time in minutes between uploads):
+13. Enter `1` to select the **nano** text editor.
+14. Scroll to the bottom and add the following two lines (the number `5` in the second line indicates the time in minutes between uploads):
     ```
     @reboot ~/smesh/snode/scripts/start_read_aqi.sh
     */5 * * * * /usr/bin/python3 ~/smesh/snode/scripts/upload_to_gdrive.py
     ```
-12. Press `Ctrl + X` to exit.
-13. Type `Y` and press `Enter` to save changes.
-14. Run the command:
+15. Press `Ctrl + X` to exit.
+16. Type `Y` and press `Enter` to save changes.
+17. Run the command:
     ```
     python3 read_aqi.py /dev/ttyUSB0
     ```
-15. The Cron Unix-based job scheduler should now be active, running the `read_aqi.py` and `upload_to_gdrive.py` scripts to upload data to Google Drive.
+18. The Cron Unix-based job scheduler should now be active, running the `read_aqi.py` and `upload_to_gdrive.py` scripts to upload data to Google Drive.
 
 ## Troubleshooting Tips
 
