@@ -32,7 +32,8 @@ For each telemetry reading:
 def log_to_csv(filename, data, headers):
     # Write headers if file does not yet exist
     if not os.path.exists(filename):
-        with open(filename, 'a') as file:
+        print("Adding headers to {filename}\n")
+        with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(headers)
     
