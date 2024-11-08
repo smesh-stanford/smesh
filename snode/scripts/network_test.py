@@ -1,3 +1,10 @@
+"""
+Temporary Script for Network Test with 7 SNodes on Saturday 11/02/2024
+
+Authors: Lisa Fung, Daniel Neamati, Joshua Dong
+Last Updated: 11/07/2024
+"""
+
 import time
 import sys
 import os
