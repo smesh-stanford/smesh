@@ -66,7 +66,7 @@ def format_bme_log(data_dict):
     Format BME688 data to log to csv file while handling possible missing data.
     """
     expected_keys = ['temperature', 'relativeHumidity', 'barometricPressure', 'gasResistance', 'iaq']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
+    expected_keys += ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart']
     return format_to_log(data_dict, expected_keys), expected_keys
 
 def format_pmsa_log(data_dict):
@@ -74,7 +74,7 @@ def format_pmsa_log(data_dict):
     Format PMSA003I data to log to csv file while handling possible missing data.
     """
     expected_keys = ['pm10Standard', 'pm25Standard', 'pm100Standard', 'pm10Environmental', 'pm25Environmental', 'pm100Environmental']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
+    expected_keys += ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart']
     return format_to_log(data_dict, expected_keys), expected_keys
 
 def format_ina_log(data_dict):
@@ -82,7 +82,7 @@ def format_ina_log(data_dict):
     Format INA260 data to log to csv file while handling possible missing data.
     """
     expected_keys = ['ch3Voltage', 'ch3Current']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
+    expected_keys += ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart']
     return format_to_log(data_dict, expected_keys), expected_keys
 
 def format_device_metrics_log(data_dict):
@@ -90,7 +90,7 @@ def format_device_metrics_log(data_dict):
     Format device metrics data to log to csv file while handling possible missing data.
     """
     expected_keys = ['batteryLevel', 'voltage', 'channelUtilization', 'airUtilTx']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
+    expected_keys += ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart']
     return format_to_log(data_dict, expected_keys), expected_keys
 
 def log_to_csv_from_preset(filename, curr_date_time, from_node, data_dict, preset):
