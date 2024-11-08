@@ -107,8 +107,6 @@ def log_to_csv_from_preset(filename, curr_date_time, from_node, data_dict, prese
     """
     
     preset_data, expected_keys = preset(data_dict)
-    print("Expected_keys:", expected_keys)
-    print("Preset data:", preset_data)
     data_to_log = [curr_date_time, from_node] + preset_data
     headers = ["Timestamp", "Sender"] + expected_keys
 
@@ -128,6 +126,8 @@ def on_receive(packet, interface):
     log_file_prefix = f'./data/{nodeid}'
 
     try:
+        # Future: Add recipient node when transition to database logging
+
         from_node = hex(packet['from'])
         print("\nFrom node:", from_node)
         
