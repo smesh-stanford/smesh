@@ -1,0 +1,36 @@
+/* styles.css */
+
+/* Format Headers */
+h1 {
+    margin-left: 20px; /* Left indent */
+}
+
+/* Table Scrolling */
+.table-container {
+    max-height: 300px; /* Set the maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ddd; /* Border for the container */
+  }
+
+/* Format Tables */
+table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Collapse borders */
+    margin: 20px 0; /* Margin for spacing */
+  }
+  
+  th, td {
+    padding: 12px; /* Padding inside cells */
+    text-align: center; /* Align text to center */
+    border: 1px solid #ddd; /* Border around cells */
+  }
+  
+  th {
+    background-color: #f2f2f2; /* Background color for header */
+    color: #333; /* Text color for header */
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5; /* Highlight row on hover */
+  }
+  
