@@ -32,7 +32,6 @@ For each telemetry reading:
 def log_to_csv(filename, data, headers):
     # Write headers if file does not yet exist
     if not os.path.exists(filename):
-        print("Adding headers to {filename}\n")
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(headers)
@@ -136,7 +135,7 @@ def on_receive(packet, interface):
             telemetry_data = packet['decoded']['telemetry']
             print(f"Packet from {packet['fromId']} at {str(datetime.now())}")
 
-            signal_strength_data = {key: packet[key] for key in ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart'] if key in packet}
+            signal_strength_data = {key: packet[key] for key in ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart'] if key in packet}
 
             if 'environmentMetrics' in telemetry_data:
                 expected_keys = []
