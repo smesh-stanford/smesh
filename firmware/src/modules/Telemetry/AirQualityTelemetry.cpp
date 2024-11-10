@@ -21,7 +21,8 @@ int32_t AirQualityTelemetryModule::runOnce()
         without having to configure it from the PythonAPI or WebUI.
     */
 
-    // moduleConfig.telemetry.air_quality_enabled = 1;
+    moduleConfig.telemetry.air_quality_enabled = 1;
+    moduleConfig.telemetry.air_quality_interval = 3;
 
     if (!(moduleConfig.telemetry.air_quality_enabled)) {
         // If this module is not enabled, and the user doesn't want the display screen don't waste any OSThread time on it
@@ -32,43 +33,49 @@ int32_t AirQualityTelemetryModule::runOnce()
         // This is the first time the OSThread library has called this function, so do some setup
         firstTime = false;
 
-        if (moduleConfig.telemetry.air_quality_enabled) {
-            LOG_INFO("Air quality Telemetry: init");
-            if (!aqi.begin_I2C()) {
-#ifndef I2C_NO_RESCAN
-                LOG_WARN("Could not establish i2c connection to AQI sensor. Rescan");
-                // rescan for late arriving sensors. AQI Module starts about 10 seconds into the boot so this is plenty.
-                uint8_t i2caddr_scan[] = {PMSA0031_ADDR};
-                uint8_t i2caddr_asize = 1;
-                auto i2cScanner = std::unique_ptr<ScanI2CTwoWire>(new ScanI2CTwoWire());
-#if defined(I2C_SDA1)
-                i2cScanner->scanPort(ScanI2C::I2CPort::WIRE1, i2caddr_scan, i2caddr_asize);
-#endif
-                i2cScanner->scanPort(ScanI2C::I2CPort::WIRE, i2caddr_scan, i2caddr_asize);
-                auto found = i2cScanner->find(ScanI2C::DeviceType::PMSA0031);
+        if (moduleConfig.telemetry.air_quality_enabled) {     
+            LOG_INFO("Air quality Telemetry: Initializing");
+            if (!aqi.begin_I2C(&Wire1)) {
+                LOG_WARN("Could not establish i2c connection on peripheral bus");
+                return disable();
+            }
+            // Look for the Sensor
+            uint8_t i2caddr_scan[] = {PMSA0031_ADDR};
+            uint8_t i2caddr_asize = 1;
+            auto i2cScanner = std::unique_ptr<ScanI2CTwoWire>(new ScanI2CTwoWire());
+            i2cScanner->scanPort(ScanI2C::I2CPort::WIRE1, i2caddr_scan, i2caddr_asize);
+            auto found = i2cScanner->find(ScanI2C::DeviceType::PMSA0031);
+            if (found.type != ScanI2C::DeviceType::NONE) {
+                nodeTelemetrySensorsMap[meshtastic_TelemetrySensorType_PMSA003I].first = found.address.address;
+                nodeTelemetrySensorsMap[meshtastic_TelemetrySensorType_PMSA003I].second =
+                    i2cScanner->fetchI2CBus(found.address);
+                return (1000);
+                }
+            uint16_t try_again = 1000;
+            while (try_again--) {
+                LOG_WARN("Could not establish i2c connection to AQI sensor. Rescanning...");
                 if (found.type != ScanI2C::DeviceType::NONE) {
                     nodeTelemetrySensorsMap[meshtastic_TelemetrySensorType_PMSA003I].first = found.address.address;
                     nodeTelemetrySensorsMap[meshtastic_TelemetrySensorType_PMSA003I].second =
                         i2cScanner->fetchI2CBus(found.address);
-                    return 1000;
+                    return (1000);
+                    }
                 }
-#endif
-                return disable();
-            }
-            return 1000;
+            LOG_WARN("Could not establish i2c connection to AQI sensor.");
+            return disable();
         }
-        return disable();
-    } else {
+        } else {
         // if we somehow got to a second run of this module with measurement disabled, then just wait forever
         if (!moduleConfig.telemetry.air_quality_enabled)
             return disable();
 
         if (((lastSentToMesh == 0) ||
-             !Throttle::isWithinTimespanMs(lastSentToMesh, Default::getConfiguredOrDefaultMsScaled(
-                                                               moduleConfig.telemetry.air_quality_interval,
-                                                               default_telemetry_broadcast_interval_secs, numOnlineNodes))) &&
-            airTime->isTxAllowedChannelUtil(config.device.role != meshtastic_Config_DeviceConfig_Role_SENSOR) &&
-            airTime->isTxAllowedAirUtil()) {
+             !Throttle::isWithinTimespanMs(lastSentToMesh, 3000))){
+            //  Default::getConfiguredOrDefaultMsScaled(
+            //        moduleConfig.telemetry.air_quality_interval,
+            //        default_telemetry_broadcast_interval_secs, numOnlineNodes))) &&
+            // airTime->isTxAllowedChannelUtil(config.device.role != meshtastic_Config_DeviceConfig_Role_SENSOR) &&
+            // airTime->isTxAllowedAirUtil()) {
             sendTelemetry();
             lastSentToMesh = millis();
         } else if (service->isToPhoneQueueEmpty()) {
@@ -107,7 +114,7 @@ bool AirQualityTelemetryModule::handleReceivedProtobuf(const meshtastic_MeshPack
 bool AirQualityTelemetryModule::getAirQualityTelemetry(meshtastic_Telemetry *m)
 {
     if (!aqi.read(&data)) {
-        LOG_WARN("Skip send measurements. Could not read AQIn");
+        LOG_WARN("Skipping send measurements. Could not read AQIn");
         return false;
     }
 
@@ -121,8 +128,9 @@ bool AirQualityTelemetryModule::getAirQualityTelemetry(meshtastic_Telemetry *m)
     m->variant.air_quality_metrics.pm25_environmental = data.pm25_env;
     m->variant.air_quality_metrics.pm100_environmental = data.pm100_env;
 
-    LOG_INFO("Send: PM1.0(Standard)=%i, PM2.5(Standard)=%i, PM10.0(Standard)=%i", m->variant.air_quality_metrics.pm10_standard,
-             m->variant.air_quality_metrics.pm25_standard, m->variant.air_quality_metrics.pm100_standard);
+    LOG_INFO("(Sending): PM1.0(Standard)=%i, PM2.5(Standard)=%i, PM10.0(Standard)=%i",
+             m->variant.air_quality_metrics.pm10_standard, m->variant.air_quality_metrics.pm25_standard,
+             m->variant.air_quality_metrics.pm100_standard);
 
     LOG_INFO("         | PM1.0(Environmental)=%i, PM2.5(Environmental)=%i, PM10.0(Environmental)=%i",
              m->variant.air_quality_metrics.pm10_environmental, m->variant.air_quality_metrics.pm25_environmental,
@@ -149,7 +157,7 @@ meshtastic_MeshPacket *AirQualityTelemetryModule::allocReply()
         if (decoded->which_variant == meshtastic_Telemetry_air_quality_metrics_tag) {
             meshtastic_Telemetry m = meshtastic_Telemetry_init_zero;
             if (getAirQualityTelemetry(&m)) {
-                LOG_INFO("Air quality telemetry reply to request");
+                LOG_INFO("Air quality telemetry replying to request");
                 return allocDataProtobuf(m);
             } else {
                 return NULL;
@@ -177,10 +185,10 @@ bool AirQualityTelemetryModule::sendTelemetry(NodeNum dest, bool phoneOnly)
 
         lastMeasurementPacket = packetPool.allocCopy(*p);
         if (phoneOnly) {
-            LOG_INFO("Send packet to phone");
+            LOG_INFO("Sending packet to phone");
             service->sendToPhone(p);
         } else {
-            LOG_INFO("Send packet to mesh");
+            LOG_INFO("Sending packet to mesh");
             service->sendToMesh(p, RX_SRC_LOCAL, true);
         }
         return true;
