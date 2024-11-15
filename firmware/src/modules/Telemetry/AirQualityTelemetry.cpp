@@ -40,7 +40,9 @@ int32_t AirQualityTelemetryModule::runOnce()
                           on the second bus (for heltec v3: sda=41, scl=42)\n");
                 return disable();
             }
-            /* Later Meshtastic update, replaced with SMesh update
+            /* 
+            // Later Meshtastic update, replaced with SMesh update
+            
             if (!aqi.begin_I2C()) {
 #ifndef I2C_NO_RESCAN
                 LOG_WARN("Could not establish i2c connection to AQI sensor. Rescan");
