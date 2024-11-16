@@ -9,9 +9,9 @@
 
 // #define USERPREFS_EVENT_MODE 1
 
-// #define USERPREFS_CONFIG_LORA_REGION meshtastic_Config_LoRaConfig_RegionCode_US
+#define USERPREFS_CONFIG_LORA_REGION meshtastic_Config_LoRaConfig_RegionCode_US
 // #define USERPREFS_LORACONFIG_MODEM_PRESET meshtastic_Config_LoRaConfig_ModemPreset_SHORT_FAST
-// #define USERPREFS_LORACONFIG_CHANNEL_NUM 31
+#define USERPREFS_LORACONFIG_CHANNEL_NUM 104        // Was 31, changed to 104 for SMesh
 // #define USERPREFS_CONFIG_LORA_IGNORE_MQTT true
 
 // #define USERPREFS_CONFIG_GPS_MODE meshtastic_Config_PositionConfig_GpsMode_ENABLED
