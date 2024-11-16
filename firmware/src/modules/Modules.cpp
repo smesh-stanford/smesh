@@ -194,6 +194,9 @@ void setupModules()
         new EnvironmentTelemetryModule();
         if (nodeTelemetrySensorsMap[meshtastic_TelemetrySensorType_PMSA003I].first > 0) {
             new AirQualityTelemetryModule();
+            LOG_INFO("In Modules.cpp: PMSA003I found");
+        } else {
+                LOG_INFO("In Modules.cpp: PMSA003I NOT detected");
         }
         if (nodeTelemetrySensorsMap[meshtastic_TelemetrySensorType_MAX30102].first > 0 ||
             nodeTelemetrySensorsMap[meshtastic_TelemetrySensorType_MLX90614].first > 0) {
@@ -245,4 +248,13 @@ void setupModules()
     // NOTE! This module must be added LAST because it likes to check for replies from other modules and avoid sending extra
     // acks
     routingModule = new RoutingModule();
+
+    // Print all Telemetry Sensors to check which modules have been detected.
+    /*
+    LOG_INFO("nodeTelemetrySensorsMap Contents");
+    for (const auto& pair : nodeTelemetrySensorsMap) {
+        // pair has form {sensorType : <uint8_t, TwoWire *>}
+        LOG_INFO(std::string("Sensor: ") + std::string(pair.first) + std::string(", Address: ") + std::string(pair.second.first));
+    }
+    */
 }
