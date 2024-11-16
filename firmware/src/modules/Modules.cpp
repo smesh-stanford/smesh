@@ -254,7 +254,9 @@ void setupModules()
     LOG_INFO("nodeTelemetrySensorsMap Contents");
     for (const auto& pair : nodeTelemetrySensorsMap) {
         // pair has form {sensorType : <uint8_t, TwoWire *>}
-        LOG_INFO(std::string("Sensor: ") + std::string(pair.first) + std::string(", Address: ") + std::string(pair.second.first));
+        // TODO: Fix types!
+        LOG_INFO(std::string("Sensor: ") + std::string(pair.first) + std::string(", Address: ") + std::string(pair.second->first));
     }
     */
+    
 }
