@@ -1,0 +1,23 @@
+config:
+    bluetooth:
+        enabled: true
+        fixedPin: 336710
+        mode: FIXED_PIN
+    device:
+        nodeInfoBroadcastSecs: 10800
+        serialEnabled: true
+    display:
+        screenOnSecs: 600
+    lora:
+        channelNum: 104
+        frequencyOffset: 0.05
+        hopLimit: 5
+        region: US
+    telemetry:
+        airQualityEnabled: true
+        airQualityInterval: 30
+        deviceUpdateInterval: 360
+        environmentMeasurementEnabled: true
+        environmentUpdateInterval: 60
+        powerMeasurementEnabled: true
+        powerUpdateInterval: 300
