@@ -1,0 +1,115 @@
+num=67 priority=10)EnvironmentTelemetryModule 
+No modules interested in portnum=67, src=LOCAL
+localSend to channel 0
+Add packet record (id=0xc48d8dba fr=0xec to=0xff, WantAck=0, HopLim=5 Ch=0x0 Portnum=67 priority=10)
+Expanding short PSK #1
+Using AES128 key!
+ESP32 crypt fr=4358fbec, num=c48d8dba, numBytes=33!
+enqueuing for send (id=0xc48d8dba fr=0xec to=0xff, WantAck=0, HopLim=5 Ch=0x8 encrypted hopStart=5 priority=10)
+txGood=79,rxGood=83,rxBad=0
+Using channel 0 (hash 0x8)
+Expanding short PSK #1
+Using AES128 key!
+ESP32 crypt fr=4358fbec, num=c48d8dba, numBytes=33!
+decoded message (id=0xc48d8dba fr=0xec to=0xff, WantAck=0, HopLim=5 Ch=0x0 Portnum=67 hopStart=5 priority=10)
+Starting low level send (id=0xc48d8dba fr=0xec to=0xff, WantAck=0, HopLim=5 Ch=0x8 encrypted hopStart=5 priority=10)
+(bw=250, sf=11, cr=4/5) packet symLen=8 ms, payloadSize=49, time 600 ms
+AirTime - Packet transmitted : 600ms
+Client wants config, nonce=1890210253
+Enter state: SERIAL
+Got 5 files in manifest
+Starting API client config
+getFromRadio=STATE_SEND_MY_INFO
+getFromRadio=STATE_SEND_OWN_NODEINFO
+getFromRadio=STATE_SEND_METADATA
+getFromRadio=STATE_SEND_CHANNELS
+getFromRadio=STATE_SEND_CHANNELS
+getFromRadio=STATE_SEND_CHANNELS
+getFromRadio=STATE_SEND_CHANNELS
+getFromRadio=STATE_SEND_CHANNELS
+getFromRadio=STATE_SEND_CHANNELS
+getFromRadio=STATE_SEND_CHANNELS
+getFromRadio=STATE_SEND_CHANNELS
+getFromRadio=STATE_SEND_CONFIG
+getFromRadio=STATE_SEND_CONFIG
+getFromRadio=STATE_SEND_CONFIG
+getFromRadio=STATE_SEND_CONFIG
+getFromRadio=STATE_SEND_CONFIG
+getFromRadio=STATE_SEND_CONFIG
+getFromRadio=STATE_SEND_CONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_MODULECONFIG
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x336544fc, lastseen=1729963528, id=!336544fc, name=Meshtastic 44fc
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x43590ff4, lastseen=1730920346, id=!43590ff4, name=Meshtastic 0ff4
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433b0098, lastseen=1729865985, id=!433b0098, name=Meshtastic 0098
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433efcb4, lastseen=1730920521, id=!433efcb4, name=Meshtastic fcb4
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x336918e8, lastseen=1730921042, id=!336918e8, name=ALPHA JR
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x33644004, lastseen=1730575214, id=!33644004, name=Meshtastic 4004
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433b00fc, lastseen=1729963813, id=!433b00fc, name=SMesh 2
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433ad7c0, lastseen=1730916515, id=!433ad7c0, name=Meshtastic d7c0
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433b0b38, lastseen=1730921093, id=!433b0b38, name=SMesh 3
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433bc2b0, lastseen=1730920738, id=!433bc2b0, name=SMesh 1
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433acb14, lastseen=1730921083, id=!433acb14, name=SMesh 6
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433aad0c, lastseen=1730921070, id=!433aad0c, name=SMesh 7
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433aafcc, lastseen=1730921068, id=!433aafcc, name=SMesh 4
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433ad35c, lastseen=1730921073, id=!433ad35c, name=SMesh 8
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433abf20, lastseen=1730920988, id=!433abf20, name=Meshtastic bf20
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x336462e4, lastseen=1730325413, id=!336462e4, name=Meshtastic 62e4
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x4358db28, lastseen=1730575368, id=!4358db28, name=Meshtastic db28
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433f0700, lastseen=1730611032, id=!433f0700, name=Meshtastic 0700
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x3364411c, lastseen=1730607419, id=!3364411c, name=Meshtastic 411c
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433af864, lastseen=1730921026, id=!433af864, name=Meshtastic f864
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433aa1d8, lastseen=1730756943, id=!433aa1d8, name=Meshtastic a1d8
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+nodeinfo: num=0x433a62d0, lastseen=0, id=!433a62d0, name=Meshtastic 62d0
+getFromRadio=STATE_SEND_OTHER_NODEINFOS
+Done sending nodeinfos
+getFromRadio=STATE_SEND_FILEMANIFEST
+File: File:  (221) bytes
+File: File:  (221) bytes
+getFromRadio=STATE_SEND_FILEMANIFEST
+File: File:  (57) bytes
+File: File:  (57) bytes
+getFromRadio=STATE_SEND_FILEMANIFEST
+File: File:  (107) bytes
+File: File:  (107) bytes
+getFromRadio=STATE_SEND_FILEMANIFEST
+File: File:  (2115) bytes
+File: File:  (2115) bytes
+getFromRadio=STATE_SEND_FILEMANIFEST
+File: File:  (107) bytes
+File: File:  (107) bytes
+getFromRadio=STATE_SEND_FILEMANIFEST
+getFromRadio=STATE_SEND_COMPLETE_ID
