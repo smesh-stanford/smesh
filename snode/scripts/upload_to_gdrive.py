@@ -18,6 +18,9 @@ def upload_files(folder_path, drive_folder_id=None):
 
     # If drive_folder_id is None, upload to the root directory.
     for filename in os.listdir(folder_path):
+        if filename.endswith('.txt'):
+            continue
+
         file_path = os.path.join(folder_path, filename)
         if os.path.isfile(file_path):
             # Build the query to search for existing files
