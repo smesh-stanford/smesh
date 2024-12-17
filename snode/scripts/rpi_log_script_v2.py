@@ -6,9 +6,10 @@ Changes post-Henry Coe Deployment:
 -- Purpose: 1) Detect RPi 4 crashes, 2) Prevent wearing out directory when writing to disk
 
 Issues to address in v2:
-- Error with `git pull` when file names have colons, so replace with underscores ':' becomes '_'
+- Error with `git pull` when file names have colons, so replace with underscores. So ':' becomes '_'
 - Add headers in CSV data
 - Place all data and log files into separate folders for better readibility
+- Log both from and fromId from packets
 
 Authors: Lisa, Kirby, Rohan, Pete
 Previous Authors: Daniel, Joshua
@@ -63,6 +64,24 @@ def format_to_log(data_dict, expected_keys):
     return data
 
 
+def format_telemetry_log(data_dict, telemetry_name):
+    """
+    Format BME688 data to log to csv file while handling possible missing data.
+    Inputs:
+        data_dict : Dict, measurement names and values
+        telemetry_name : str, name of value received
+    """
+    expected_keys_dict = {
+
+    }
+
+    expected_keys = ['temperature', 'relativeHumidity', 'barometricPressure', 'gasResistance', 'iaq']
+    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
+    return format_to_log(data_dict, expected_keys)
+
+
+
+
 def format_bme_log(data_dict):
     """
     Format BME688 data to log to csv file while handling possible missing data.
@@ -107,7 +126,8 @@ def log_to_csv_from_preset(filename, curr_date_time, from_node, data_dict, prese
     - filename: str, path to the csv file
     - curr_date_time: str, current date and time
     - from_node: str, node id
-    - data: list, data to log
+    - data_dict: Dict, dictionary of keys with data values
+    - data_to_log: list, data to log
     - preset: function handle, function to format data
     """
 
@@ -125,7 +145,7 @@ def on_receive(packet, interface):
     if (datetime.now() >= on_receive_dt + timedelta(hours=1)):
         on_receive_dt = datetime.now()
 
-    print(f"Received Packet: {packet}")
+    print(f"\nReceived Packet: {packet}")
     # print("All reachable nodes:", interface.nodes.keys())
 
     # nodeid is the last 4 hex digits of node connected via serial port
@@ -139,47 +159,32 @@ def on_receive(packet, interface):
         
         if packet['decoded']['portnum'] == 'TELEMETRY_APP':
             telemetry_data = packet['decoded']['telemetry']
-            print(f"Packet from {packet['fromId']} at {str(datetime.now())}")
+            print(f"Packet from {from_node} (fromId: {packet['fromId']}) at {str(datetime.now())}")
 
-            signal_strength_data = {key: packet[key] for key in ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart'] if key in packet}
+            signal_strength_data = {key: packet[key] for key in ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart'] if key in packet}
 
-            if 'environmentMetrics' in telemetry_data:
-                print("BME688")
-                metrics = telemetry_data['environmentMetrics']
-                print(metrics)
-                # log_to_csv(f'./data/{nodeid}_bme688.csv', [str(datetime.now()), from_node, metrics['temperature'], metrics['relativeHumidity'],
-                #          metrics['barometricPressure'], metrics['gasResistance'], metrics['iaq']])
-                log_to_csv_from_preset(f'{log_file_prefix}_bme688_{str(on_receive_dt)}.csv', str(datetime.now()), 
-                                       from_node, metrics | signal_strength_data, format_bme_log)
+            # telemetry_dict = {
+            #     'environmentMetrics' : 'bme688',
+            #     'airQualityMetrics' : 'pmsa003i',
+            #     'powerMetrics' : 'ina260',
+            #     'deviceMetrics' : 'device_metrics'
+            # }
+            # telemetry_list = ['environmentMetrics', 'airQualityMetrics', 'powerMetrics', 'deviceMetrics']
 
-            elif 'airQualityMetrics' in telemetry_data:
-                print("PMSA003I")
-                metrics = telemetry_data['airQualityMetrics']
-                print(metrics)
-                # log_to_csv(f'./data/{nodeid}_pmsa003i.csv', 
-                #            [str(datetime.now()), from_node, metrics['pm10Standard'], metrics['pm25Standard'], metrics['pm100Standard'], 
-                #             metrics['pm10Environmental'], metrics['pm25Environmental'], metrics['pm100Environmental']])
-                log_to_csv_from_preset(f'{log_file_prefix}_pmsa003i_{str(on_receive_dt)}.csv', str(datetime.now()),
-                                       from_node, metrics | signal_strength_data, format_pmsa_log)
+            expected_telemetry = False
+
+            for telemetry_key, telemetry_name in telemetry_dict.items():
+                if telemetry_key in telemetry_data:
+                    print(f"Telemetry key: {telemetry_key}, Name: {telemetry_name}")
+                    metrics = telemetry_data[telemetry_key]
+                    print(f"Metrics: {metrics}")
+                    log_to_csv_from_preset(f'{log_file_prefix}_{telemetry_name}_{str(on_receive_dt)}.csv', str(datetime.now()), 
+                                        from_node, metrics | signal_strength_data, format_bme_log)
+                    
+                    expected_telemetry = True
+                    break
                 
-            elif 'powerMetrics' in telemetry_data:
-                print("INA260")
-                metrics = telemetry_data['powerMetrics']
-                print(metrics)
-                # log_to_csv(f'./data/{nodeid}_ina260.csv', [str(datetime.now()), from_node, metrics['ch3Voltage']])
-                log_to_csv_from_preset(f'{log_file_prefix}_ina260_{str(on_receive_dt)}.csv', str(datetime.now()),
-                                       from_node, metrics | signal_strength_data, format_ina_log)
-
-            elif 'deviceMetrics' in telemetry_data:
-                print("Device Metrics")
-                metrics = telemetry_data['deviceMetrics']
-                print(metrics)
-                # log_to_csv(f'./data/{nodeid}_device_metrics.csv', [str(datetime.now()), from_node, metrics['batteryLevel'], 
-                #     metrics['voltage'], metrics['channelUtilization'], metrics['airUtilTx']])
-                log_to_csv_from_preset(f'{log_file_prefix}_device_metrics_{str(on_receive_dt)}.csv', str(datetime.now()),
-                                       from_node, metrics | signal_strength_data, format_device_metrics_log)
-
-            else:
+            if not expected_telemetry:
                 print("Other packet")
                 print(telemetry_data)
                 log_to_csv(f'{log_file_prefix}_other_{str(on_receive_dt)}.csv', [str(datetime.now()), from_node, telemetry_data])
@@ -194,6 +199,7 @@ def on_receive(packet, interface):
         print("ERROR: UnicodeDecodeError")
         pass  # Ignore UnicodeDecodeError silently
 
+    print("-"*30, "\n")     # Separate packets more visibly
 
 # Runs every time script is started
 def main():
