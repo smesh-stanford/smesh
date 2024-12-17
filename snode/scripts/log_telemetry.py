@@ -127,7 +127,7 @@ def on_receive(packet, interface):
 
     try:
         # Future: Add recipient node when transition to database logging
-
+        print("Reached ")
         from_node = hex(packet['from'])
         print("\nFrom node:", from_node)
         
@@ -139,7 +139,7 @@ def on_receive(packet, interface):
 
             if 'environmentMetrics' in telemetry_data:
                 expected_keys = []
-                print("BME688")
+                print("Environment: BME688, Wind")
                 metrics = telemetry_data['environmentMetrics']
                 print(metrics)
                 # log_to_csv(f'./data/{nodeid}_bme688.csv', [str(datetime.now()), from_node, metrics['temperature'], metrics['relativeHumidity'],
