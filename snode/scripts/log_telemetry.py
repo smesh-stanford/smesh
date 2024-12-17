@@ -123,7 +123,7 @@ def on_receive(packet, interface):
     # nodeid is the last 4 hex digits of node connected via serial port
     nodeid = hex(interface.myInfo.my_node_num)[-4:]
 
-    log_file_prefix = f'./data/{nodeid}'
+    log_file_prefix = f'/home/pi/smesh/snode/data/henry_{nodeid}'
 
     try:
         # Future: Add recipient node when transition to database logging
