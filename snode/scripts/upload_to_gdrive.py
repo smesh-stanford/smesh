@@ -2,6 +2,7 @@ import os
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
+import datetime
 
 # Define the Google Drive API scopes and service account file path
 SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -18,30 +19,29 @@ def upload_files(folder_path, drive_folder_id=None):
 
     # If drive_folder_id is None, upload to the root directory.
     for filename in os.listdir(folder_path):
-        if filename.endswith('.txt'):
+        if filename.endswith(".txt"):
             continue
-
         file_path = os.path.join(folder_path, filename)
         if os.path.isfile(file_path):
             # Build the query to search for existing files
             query = f"mimeType != 'application/vnd.google-apps.folder' and name = '{filename}' and trashed = false"
             if drive_folder_id:
                 query += f" and '{drive_folder_id}' in parents"
-            
+
             # Search for the file
             response = service.files().list(q=query, spaces='drive', fields='files(id, name)').execute()
             files = response.get('files', [])
-            
+
             media = MediaFileUpload(file_path, resumable=True)
-            
+
             if files:
                 # File exists, update it
                 file_id = files[0]['id']
-                print(f'File {filename} exists. Updating...')
+                print(f'{datetime.datetime.now()} File {filename} exists. Updating...')
                 updated_file = service.files().update(fileId=file_id, media_body=media).execute()
                 print(f'{filename} updated successfully.')
             else:
-                print(f'Uploading {filename}...')
+                print(f'{datetime.datetime.now()} Uploading {filename}...')
                 file_metadata = {'name': filename}
                 if drive_folder_id:
                     file_metadata['parents'] = [drive_folder_id]
@@ -49,6 +49,7 @@ def upload_files(folder_path, drive_folder_id=None):
                 print(f'{filename} uploaded successfully.')
 
 if __name__ == '__main__':
+    print(f'{datetime.datetime.now()} STARTING UPLOAD PYTHON SCRIPT.')
     # Replace 'your/local/folder/path' with the path to your local folder
     folder_to_upload = '/home/pi/smesh/snode/data' # Replace with the path to your data folder
 
@@ -58,4 +59,3 @@ if __name__ == '__main__':
 
     upload_files(folder_to_upload, drive_folder_id)
 
-    
