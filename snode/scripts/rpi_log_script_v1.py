@@ -1,11 +1,16 @@
 """
 Updated Raspberry Pi 4 Logging Script
-Changes after Henry Coe Deployment:
-- Start new log file (with datetime appended) each time this script is run.
--- Detect RPi 4 crashing
--- Won't wear out directory on disk
+
+Changes post-Henry Coe Deployment:
+- Start new log file (with datetime appended) every time and every 1 hour this script is run.
+-- Purpose: 1) Detect RPi 4 crashes, 2) Prevent wearing out directory when writing to disk
+
+Issues to address in v2:
+- Error with `git pull` when file names have colons, so replace with underscores ':' becomes '_'
+- Add headers in CSV data
 
 Authors: Lisa, Kirby, Rohan, Pete
+Previous Authors: Daniel, Joshua
 Last Updated: 12/16/2024
 """
 
