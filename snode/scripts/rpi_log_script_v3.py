@@ -25,10 +25,6 @@ import os
 import csv
 import threading
 from datetime import datetime, timedelta
-# import pandas as pd
-# import matplotlib.pyplot as plt
-# import matplotlib.dates as mdates
-# from matplotlib.animation import FuncAnimation
 from pubsub import pub
 from meshtastic.serial_interface import SerialInterface
 # from meshtastic import portnums_pb2
@@ -41,6 +37,10 @@ ON_RECEIVE_DT = datetime.now()
 # in the file writing operations when multiple packets arrive
 # at similar times.
 FILE_LOCK = threading.Lock()
+
+################################################
+# Logging Functions
+################################################
 
 def log_to_csv(filename, data, headers):
     # global FILE_LOCK
@@ -103,6 +103,10 @@ def log_telemetry_to_csv(filename, curr_date_time, from_node, data_dict, telemet
     log_to_csv(filename, data_to_log, headers)
 
 
+################################################
+# Callback Functions
+################################################
+
 def on_receive(packet, interface):
     """
     Callback reads BME688 and PMSA003I data packets over the e.g. serial interface.
@@ -139,7 +143,6 @@ def on_receive(packet, interface):
 
             signal_strength_data = {key: packet[key] for key in ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart'] if key in packet}
 
-            # format_dt_str = str(ON_RECEIVE_DT).replace(":", "_")    # Replace ':' in datetime with '_' for filename
             # Format as 'YYYY-MM-DD_HH-MM-SS', such as '2024-12-17_13-07-56'
             format_dt_str = ON_RECEIVE_DT.strftime("%Y-%m-%d_%H-%M-%S")    # Format datetime for filename
 
@@ -163,7 +166,7 @@ def on_receive(packet, interface):
                 log_to_csv(f'{log_file_prefix}_other_{format_dt_str}.csv', [str(datetime.now()), from_node, telemetry_data], other_headers)
 
             # log telemetry data to txt file
-            log_to_txt(f'{log_file_prefix}_logs_{format_dt_str}.txt', [str(datetime.now()), from_node, telemetry_data])
+            log_to_txt(f'{log_file_prefix}_logs_{format_dt_str}.txt', [str(datetime.now()), from_node, packet])
 
     except KeyError:
         print("ERROR: KeyError")
@@ -175,6 +178,10 @@ def on_receive(packet, interface):
     print(f"\nReceived Packet: {packet}")
     print("-"*30, "\n")     # Separate packets more visibly
 
+
+################################################
+# Main Function
+################################################
 
 # Runs every time script is started
 def main():
