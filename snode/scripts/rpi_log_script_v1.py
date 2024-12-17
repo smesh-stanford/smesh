@@ -13,7 +13,7 @@ import time
 import sys
 import os
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
 # import pandas as pd
 # import matplotlib.pyplot as plt
 # import matplotlib.dates as mdates
@@ -114,7 +114,8 @@ def on_receive(packet, interface):
     Callback reads BME688 and PMSA003I data packets over the e.g. serial interface.
     """
     # Datetime for filename
-    if (datetime.now() >= on_receive_dt + datetime.timedelta(hours=1)):
+    global on_receive_dt
+    if (datetime.now() >= on_receive_dt + timedelta(hours=1)):
         on_receive_dt = datetime.now()
 
     print(f"Received Packet: {packet}")
