@@ -8,6 +8,7 @@ Changes post-Henry Coe Deployment:
 Issues to address in v2:
 - Error with `git pull` when file names have colons, so replace with underscores ':' becomes '_'
 - Add headers in CSV data
+- Place all data and log files into separate folders for better readibility
 
 Authors: Lisa, Kirby, Rohan, Pete
 Previous Authors: Daniel, Joshua
