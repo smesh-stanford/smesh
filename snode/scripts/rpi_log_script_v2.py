@@ -5,11 +5,13 @@ Changes post-Henry Coe Deployment:
 - Start new log file (with datetime appended) every time and every 1 hour this script is run.
 -- Purpose: 1) Detect RPi 4 crashes, 2) Prevent wearing out directory when writing to disk
 
-Issues to address in v2:
-- Error with `git pull` when file names have colons, so replace with underscores. So ':' becomes '_'
-- Add headers in CSV data
+New changes in v2:
+- Error with `git pull` when file names have colons, so replaced underscores. So ':' becomes '_'
+- Added headers in CSV data
+- Print out (stdout) both from and fromId from packets (should be same)
+
+Issues to address in v3:
 - Place all data and log files into separate folders for better readibility
-- Log both from and fromId from packets
 
 Authors: Lisa, Kirby, Rohan, Pete
 Previous Authors: Daniel, Joshua
@@ -34,7 +36,7 @@ from meshtastic.serial_interface import SerialInterface
 on_receive_dt = datetime.now()
 
 def log_to_csv(filename, data, headers):
-    # Write headers if file does not yet exist
+    # Write headers for new file
     if not os.path.exists(filename):
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)
@@ -45,24 +47,31 @@ def log_to_csv(filename, data, headers):
         writer = csv.writer(file)
         writer.writerow(data)
 
+
 def log_to_txt(filename, data):
     """
     Writes logs to txt file.
-    Closing file after each write: writes to disk.
+    Closes file after each write, which writes to disk.
     """
     with open(filename, 'a') as file:
         file.write(f"{data}\n")
 
-def format_telemetry_log(data_dict, telemetry_key):
+
+def log_telemetry_to_csv(filename, curr_date_time, from_node, data_dict, telemetry_key):
     """
-    Format telemetry data to log to csv file while handling possible missing data.
-    Inputs:
-        data_dict : Dict, measurement names and values
-        telemetry_key : str, telemetry type
-    Returns:
-        data: list of data to log
+    Use a set of expected preset telemetry data to log to csv file while accounting for missing data.
+
+    Parameters:
+    - filename: str, path to the csv file
+    - curr_date_time: str, current date and time
+    - from_node: str, node id
+    - data_dict: Dict, dictionary of data keys and values
+    - telemetry_key, str, telemetry type
+
+    Private variables:
+    - data_to_log: list, data to log
     """
-    
+
     expected_keys_dict = {
         'environmentMetrics' : ['temperature', 'relativeHumidity', 'barometricPressure', 'gasResistance', 'iaq'],
         'airQualityMetrics' : ['pm10Standard', 'pm25Standard', 'pm100Standard', 'pm10Environmental', 'pm25Environmental', 'pm100Environmental'],
@@ -71,32 +80,16 @@ def format_telemetry_log(data_dict, telemetry_key):
     }
 
     expected_keys = expected_keys_dict[telemetry_key] + ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
-    
-    data = []
+
+    data_to_log = [curr_date_time, from_node]
     for key in expected_keys:
         if key in data_dict:
-            data.append(data_dict[key])
+            data_to_log.append(data_dict[key])
         else:
-            data.append(None)
-    return data
+            data_to_log.append(None)
 
-
-def log_to_csv_from_preset(filename, curr_date_time, from_node, data_dict, preset, telemetry_key):
-    """
-    Use a set of expected preset data to log to csv file while accounting for missing data.
-
-    Parameters:
-    - filename: str, path to the csv file
-    - curr_date_time: str, current date and time
-    - from_node: str, node id
-    - data_dict: Dict, dictionary of keys with data values
-    - data_to_log: list, data to log
-    - preset: function handle, function to format data
-    - telemetry_key, str, telemetry type
-    """
-
-    data_to_log = [curr_date_time, from_node] + preset(data_dict, telemetry_key)
-    log_to_csv(filename, data_to_log)
+    headers = ['datetime', 'fromNode'] + expected_keys
+    log_to_csv(filename, data_to_log, headers)
 
 
 def on_receive(packet, interface):
@@ -105,16 +98,16 @@ def on_receive(packet, interface):
     """
     # Datetime unique identifier for log filename
     global on_receive_dt
-    # Update once every 1 hour of logging
+    # Update datetime identifier (new file) once every 1 hour of logging
     if (datetime.now() >= on_receive_dt + timedelta(hours=1)):
         on_receive_dt = datetime.now()
 
-    print(f"\nReceived Packet: {packet}")
     # print("All reachable nodes:", interface.nodes.keys())
 
     # nodeid is the last 4 hex digits of node connected via serial port
     nodeid = hex(interface.myInfo.my_node_num)[-4:]
 
+    # TODO: create new folder for each type of telemetry
     log_file_prefix = f'./data/{nodeid}'
 
     try:
@@ -123,22 +116,25 @@ def on_receive(packet, interface):
         
         if packet['decoded']['portnum'] == 'TELEMETRY_APP':
             telemetry_data = packet['decoded']['telemetry']
-            print(f"Packet from {from_node} (fromId: {packet['fromId']}) at {str(datetime.now())}")
+            print(f"{str(datetime.now())} Packet from {from_node} (fromId: {packet['fromId']})")
+
+            # Expected telemetry
+            telemetry_list = ['environmentMetrics', 'airQualityMetrics', 'powerMetrics', 'deviceMetrics']
+            expected_telemetry = False  # True if expected sensor telemetry received, else False
 
             signal_strength_data = {key: packet[key] for key in ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart'] if key in packet}
 
-            telemetry_list = ['environmentMetrics', 'airQualityMetrics', 'powerMetrics', 'deviceMetrics']
-
-            # Boolean: True if one of expected sensor telemetry received, else False
-            expected_telemetry = False
+            format_dt_str = str(on_receive_dt).replace(":", "_")    # Replace ':' in datetime with '_' for filename
 
             for telemetry_key in telemetry_list:
                 if telemetry_key in telemetry_data:
                     print(f"Telemetry key: {telemetry_key}")
+
                     metrics = telemetry_data[telemetry_key]
                     print(f"Metrics: {metrics}")
-                    log_to_csv_from_preset(f'{log_file_prefix}_{telemetry_key}_{str(on_receive_dt)}.csv', str(datetime.now()), 
-                                        from_node, metrics | signal_strength_data, format_telemetry_log, telemetry_key)
+
+                    log_telemetry_to_csv(f'{log_file_prefix}_{telemetry_key}_{format_dt_str}.csv', str(datetime.now()), 
+                                        from_node, metrics | signal_strength_data, telemetry_key)
                     
                     expected_telemetry = True
                     break
@@ -146,10 +142,11 @@ def on_receive(packet, interface):
             if not expected_telemetry:
                 print("Other packet")
                 print(f"Telemetry data: {telemetry_data}")
-                log_to_csv(f'{log_file_prefix}_other_{str(on_receive_dt)}.csv', [str(datetime.now()), from_node, telemetry_data])
+                other_headers = [''] * len(telemetry_data)
+                log_to_csv(f'{log_file_prefix}_other_{format_dt_str}.csv', [str(datetime.now()), from_node, telemetry_data], other_headers)
 
-            # log telemetry data
-            log_to_txt(f'{log_file_prefix}_logs_{str(on_receive_dt)}.txt', [str(datetime.now()), from_node, telemetry_data])
+            # log telemetry data to txt file
+            log_to_txt(f'{log_file_prefix}_logs_{format_dt_str}.txt', [str(datetime.now()), from_node, telemetry_data])
 
     except KeyError:
         print("ERROR: KeyError")
@@ -158,7 +155,9 @@ def on_receive(packet, interface):
         print("ERROR: UnicodeDecodeError")
         pass  # Ignore UnicodeDecodeError silently
 
+    print(f"\nReceived Packet: {packet}")
     print("-"*30, "\n")     # Separate packets more visibly
+
 
 # Runs every time script is started
 def main():
@@ -196,4 +195,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
