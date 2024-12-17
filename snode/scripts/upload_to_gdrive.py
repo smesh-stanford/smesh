@@ -37,11 +37,11 @@ def upload_files(folder_path, drive_folder_id=None):
             if files:
                 # File exists, update it
                 file_id = files[0]['id']
-                print(f'{datetime.datetime.now()} File {filename} exists. Updating...')
+                print(f'[{datetime.datetime.now()}] File {filename} exists. Updating...')
                 updated_file = service.files().update(fileId=file_id, media_body=media).execute()
                 print(f'{filename} updated successfully.')
             else:
-                print(f'{datetime.datetime.now()} Uploading {filename}...')
+                print(f'[{datetime.datetime.now()}] Uploading {filename}...')
                 file_metadata = {'name': filename}
                 if drive_folder_id:
                     file_metadata['parents'] = [drive_folder_id]
@@ -49,7 +49,7 @@ def upload_files(folder_path, drive_folder_id=None):
                 print(f'{filename} uploaded successfully.')
 
 if __name__ == '__main__':
-    print(f'{datetime.datetime.now()} STARTING UPLOAD PYTHON SCRIPT.')
+    print(f'[{datetime.datetime.now()}] STARTING UPLOAD PYTHON SCRIPT.')
     # Replace 'your/local/folder/path' with the path to your local folder
     folder_to_upload = '/home/pi/smesh/snode/data' # Replace with the path to your data folder
 
