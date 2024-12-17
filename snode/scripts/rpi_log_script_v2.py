@@ -46,15 +46,25 @@ def log_to_txt(filename, data):
     with open(filename, 'a') as file:
         file.write(f"{data}\n")
 
-
-def format_to_log(data_dict, expected_keys):
+def format_telemetry_log(data_dict, telemetry_key):
     """
-    Format data to log to csv file while handling possible missing data.
-
-    Parameters:
-    - data_dict: dict, data to log
-    - expected_keys: list, keys to expect in the data_dict
+    Format telemetry data to log to csv file while handling possible missing data.
+    Inputs:
+        data_dict : Dict, measurement names and values
+        telemetry_key : str, telemetry type
+    Returns:
+        data: list of data to log
     """
+    
+    expected_keys_dict = {
+        'environmentMetrics' : ['temperature', 'relativeHumidity', 'barometricPressure', 'gasResistance', 'iaq'],
+        'airQualityMetrics' : ['pm10Standard', 'pm25Standard', 'pm100Standard', 'pm10Environmental', 'pm25Environmental', 'pm100Environmental'],
+        'powerMetrics' : ['ch3Voltage', 'ch3Current'],
+        'deviceMetrics' : ['batteryLevel', 'voltage', 'channelUtilization', 'airUtilTx']
+    }
+
+    expected_keys = expected_keys_dict[telemetry_key] + ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
+    
     data = []
     for key in expected_keys:
         if key in data_dict:
@@ -62,60 +72,6 @@ def format_to_log(data_dict, expected_keys):
         else:
             data.append(None)
     return data
-
-
-def format_telemetry_log(data_dict, telemetry_name):
-    """
-    Format BME688 data to log to csv file while handling possible missing data.
-    Inputs:
-        data_dict : Dict, measurement names and values
-        telemetry_name : str, name of value received
-    """
-    expected_keys_dict = {
-
-    }
-
-    expected_keys = ['temperature', 'relativeHumidity', 'barometricPressure', 'gasResistance', 'iaq']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
-    return format_to_log(data_dict, expected_keys)
-
-
-
-
-def format_bme_log(data_dict):
-    """
-    Format BME688 data to log to csv file while handling possible missing data.
-    """
-    expected_keys = ['temperature', 'relativeHumidity', 'barometricPressure', 'gasResistance', 'iaq']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
-    return format_to_log(data_dict, expected_keys)
-
-
-def format_pmsa_log(data_dict):
-    """
-    Format PMSA003I data to log to csv file while handling possible missing data.
-    """
-    expected_keys = ['pm10Standard', 'pm25Standard', 'pm100Standard', 'pm10Environmental', 'pm25Environmental', 'pm100Environmental']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
-    return format_to_log(data_dict, expected_keys)
-
-
-def format_ina_log(data_dict):
-    """
-    Format INA260 data to log to csv file while handling possible missing data.
-    """
-    expected_keys = ['ch3Voltage', 'ch3Current']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
-    return format_to_log(data_dict, expected_keys)
-
-
-def format_device_metrics_log(data_dict):
-    """
-    Format device metrics data to log to csv file while handling possible missing data.
-    """
-    expected_keys = ['batteryLevel', 'voltage', 'channelUtilization', 'airUtilTx']
-    expected_keys += ['rxSnr', 'hopLimit', 'rxRssi', 'hopStart']
-    return format_to_log(data_dict, expected_keys)
 
 
 def log_to_csv_from_preset(filename, curr_date_time, from_node, data_dict, preset):
@@ -163,30 +119,25 @@ def on_receive(packet, interface):
 
             signal_strength_data = {key: packet[key] for key in ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart'] if key in packet}
 
-            # telemetry_dict = {
-            #     'environmentMetrics' : 'bme688',
-            #     'airQualityMetrics' : 'pmsa003i',
-            #     'powerMetrics' : 'ina260',
-            #     'deviceMetrics' : 'device_metrics'
-            # }
-            # telemetry_list = ['environmentMetrics', 'airQualityMetrics', 'powerMetrics', 'deviceMetrics']
+            telemetry_list = ['environmentMetrics', 'airQualityMetrics', 'powerMetrics', 'deviceMetrics']
 
+            # Boolean: True if one of expected sensor telemetry received, else False
             expected_telemetry = False
 
-            for telemetry_key, telemetry_name in telemetry_dict.items():
+            for telemetry_key in telemetry_list:
                 if telemetry_key in telemetry_data:
-                    print(f"Telemetry key: {telemetry_key}, Name: {telemetry_name}")
+                    print(f"Telemetry key: {telemetry_key}")
                     metrics = telemetry_data[telemetry_key]
                     print(f"Metrics: {metrics}")
-                    log_to_csv_from_preset(f'{log_file_prefix}_{telemetry_name}_{str(on_receive_dt)}.csv', str(datetime.now()), 
-                                        from_node, metrics | signal_strength_data, format_bme_log)
+                    log_to_csv_from_preset(f'{log_file_prefix}_{telemetry_key}_{str(on_receive_dt)}.csv', str(datetime.now()), 
+                                        from_node, metrics | signal_strength_data, format_telemetry_log)
                     
                     expected_telemetry = True
                     break
                 
             if not expected_telemetry:
                 print("Other packet")
-                print(telemetry_data)
+                print(f"Telemetry data: {telemetry_data}")
                 log_to_csv(f'{log_file_prefix}_other_{str(on_receive_dt)}.csv', [str(datetime.now()), from_node, telemetry_data])
 
             # log telemetry data
