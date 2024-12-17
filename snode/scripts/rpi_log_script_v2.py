@@ -12,10 +12,11 @@ New changes in v2:
 
 Issues to address in v3:
 - Place all data and log files into separate folders for better readibility
+- Handle LARK Wind data
 
-Authors: Lisa, Kirby, Rohan, Pete
-Previous Authors: Daniel, Joshua
-Last Updated: 12/16/2024
+Authors: Lisa, Kirby, Rohan, Pete, Daniel
+Previous Authors: Joshua
+Last Updated: 12/17/2024
 """
 
 import time
@@ -33,7 +34,7 @@ from meshtastic.serial_interface import SerialInterface
 
 # Global variable for unique datetime identifier in log file name
 # Creates new log file every time script is run and once every 1 hour
-on_receive_dt = datetime.now()
+ON_RECEIVE_DT = datetime.now()
 
 def log_to_csv(filename, data, headers):
     # Write headers for new file
@@ -97,10 +98,10 @@ def on_receive(packet, interface):
     Callback reads BME688 and PMSA003I data packets over the e.g. serial interface.
     """
     # Datetime unique identifier for log filename
-    global on_receive_dt
+    global ON_RECEIVE_DT
     # Update datetime identifier (new file) once every 1 hour of logging
-    if (datetime.now() >= on_receive_dt + timedelta(hours=1)):
-        on_receive_dt = datetime.now()
+    if (datetime.now() >= ON_RECEIVE_DT + timedelta(hours=1)):
+        ON_RECEIVE_DT = datetime.now()
 
     # print("All reachable nodes:", interface.nodes.keys())
 
@@ -116,7 +117,11 @@ def on_receive(packet, interface):
         
         if packet['decoded']['portnum'] == 'TELEMETRY_APP':
             telemetry_data = packet['decoded']['telemetry']
-            print(f"{str(datetime.now())} Packet from {from_node} (fromId: {packet['fromId']})")
+            print(f"[{str(datetime.now())}] Packet from {from_node} (fromId: {packet['fromId']})")
+
+            # Note any situation where the from_node and fromId are different
+            if from_node != packet['fromId']:
+                print(f"WARNING: from_node and fromId are different: {from_node} != {packet['fromId']}")
 
             # Expected telemetry
             telemetry_list = ['environmentMetrics', 'airQualityMetrics', 'powerMetrics', 'deviceMetrics']
@@ -124,7 +129,9 @@ def on_receive(packet, interface):
 
             signal_strength_data = {key: packet[key] for key in ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart'] if key in packet}
 
-            format_dt_str = str(on_receive_dt).replace(":", "_")    # Replace ':' in datetime with '_' for filename
+            # format_dt_str = str(ON_RECEIVE_DT).replace(":", "_")    # Replace ':' in datetime with '_' for filename
+            # Format as 'YYYY-MM-DD_HH-MM-SS', such as '2024-12-17_13-07-56'
+            format_dt_str = ON_RECEIVE_DT.strftime("%Y-%m-%d_%H-%M-%S")    # Format datetime for filename
 
             for telemetry_key in telemetry_list:
                 if telemetry_key in telemetry_data:
@@ -161,8 +168,8 @@ def on_receive(packet, interface):
 
 # Runs every time script is started
 def main():
-    on_receive_dt = datetime.now()
-    print(f"{on_receive_dt} Raspberry Pi Logging Script started")
+    ON_RECEIVE_DT = datetime.now()
+    print(f"{ON_RECEIVE_DT} Raspberry Pi Logging Script started")
 
     # Choose the serial port to listen to
     if len(sys.argv) < 2:
@@ -187,7 +194,7 @@ def main():
     try:
         while True:
             sys.stdout.flush()
-            time.sleep(1)  # Sleep to reduce CPU usage
+            time.sleep(1)  # Sleep to reduce CPU usage (time in seconds)
     except KeyboardInterrupt:
         print("Script terminated by user")
         local.close()
