@@ -1,0 +1,825 @@
+['2024-12-17 11:37:17.079180', '0x433aca0c', {'time': 12889, 'airQualityMetrics': {}, 'raw': time: 12889
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:37:17.355175', '0x43590ff4', {'time': 1730169132, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.243, 'channelUtilization': 0.75333333, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5679629}, 'raw': time: 1730169132
+device_metrics {
+  battery_level: 101
+  voltage: 4.243
+  channel_utilization: 0.75333333
+  air_util_tx: 0.883416653
+  uptime_seconds: 5679629
+}
+}]
+['2024-12-17 11:38:17.261460', '0x433aca0c', {'time': 12949, 'airQualityMetrics': {}, 'raw': time: 12949
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:38:17.537277', '0x43590ff4', {'time': 1730169193, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.218, 'channelUtilization': 0.75333333, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5679690}, 'raw': time: 1730169193
+device_metrics {
+  battery_level: 101
+  voltage: 4.218
+  channel_utilization: 0.75333333
+  air_util_tx: 0.883416653
+  uptime_seconds: 5679690
+}
+}]
+['2024-12-17 11:38:42.097533', '0x433aca0c', {'time': 12973, 'environmentMetrics': {'temperature': 27.268269, 'relativeHumidity': 32.727074, 'barometricPressure': 1024.6158, 'gasResistance': 212.649, 'iaq': 72}, 'raw': time: 12973
+environment_metrics {
+  temperature: 27.2682686
+  relative_humidity: 32.7270737
+  barometric_pressure: 1024.61584
+  gas_resistance: 212.649
+  iaq: 72
+}
+}]
+['2024-12-17 11:39:17.409882', '0x43590ff4', {'time': 1730169253, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.233, 'channelUtilization': 2.0266666, 'airUtilTx': 0.9000833, 'uptimeSeconds': 5679750}, 'raw': time: 1730169253
+device_metrics {
+  battery_level: 101
+  voltage: 4.233
+  channel_utilization: 2.02666664
+  air_util_tx: 0.900083303
+  uptime_seconds: 5679750
+}
+}]
+['2024-12-17 11:39:17.704651', '0x433aca0c', {'time': 13009, 'airQualityMetrics': {}, 'raw': time: 13009
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:39:18.462687', '0x433aca0c', {'time': 13009, 'deviceMetrics': {'batteryLevel': 92, 'voltage': 4.082, 'channelUtilization': 2.7533333, 'airUtilTx': 0.91786116, 'uptimeSeconds': 13010}, 'raw': time: 13009
+device_metrics {
+  battery_level: 92
+  voltage: 4.082
+  channel_utilization: 2.75333333
+  air_util_tx: 0.917861164
+  uptime_seconds: 13010
+}
+}]
+['2024-12-17 11:40:17.643902', '0x433aca0c', {'time': 13069, 'airQualityMetrics': {}, 'raw': time: 13069
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:41:17.701148', '0x43590ff4', {'time': 1730169373, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.22, 'airUtilTx': 0.9162778, 'uptimeSeconds': 5679870}, 'raw': time: 1730169373
+device_metrics {
+  battery_level: 101
+  voltage: 4.22
+  air_util_tx: 0.916277826
+  uptime_seconds: 5679870
+}
+}]
+['2024-12-17 11:41:18.267028', '0x433aca0c', {'time': 13129, 'airQualityMetrics': {}, 'raw': time: 13129
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:42:17.824601', '0x43590ff4', {'time': 1730169433, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.242, 'airUtilTx': 0.9162778, 'uptimeSeconds': 5679930}, 'raw': time: 1730169433
+device_metrics {
+  battery_level: 101
+  voltage: 4.242
+  air_util_tx: 0.916277826
+  uptime_seconds: 5679930
+}
+}]
+['2024-12-17 11:42:18.110994', '0x433aca0c', {'time': 13190, 'airQualityMetrics': {}, 'raw': time: 13190
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:43:17.920408', '0x43590ff4', {'time': 1730169493, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.238, 'airUtilTx': 0.9162778, 'uptimeSeconds': 5679990}, 'raw': time: 1730169493
+device_metrics {
+  battery_level: 101
+  voltage: 4.238
+  air_util_tx: 0.916277826
+  uptime_seconds: 5679990
+}
+}]
+['2024-12-17 11:43:18.206395', '0x433aca0c', {'time': 13250, 'airQualityMetrics': {}, 'raw': time: 13250
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:44:17.805527', '0x43590ff4', {'time': 1730169553, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.208, 'channelUtilization': 1.48, 'airUtilTx': 0.9162778, 'uptimeSeconds': 5680050}, 'raw': time: 1730169553
+device_metrics {
+  battery_level: 101
+  voltage: 4.208
+  channel_utilization: 1.48
+  air_util_tx: 0.916277826
+  uptime_seconds: 5680050
+}
+}]
+['2024-12-17 11:44:18.352655', '0x433aca0c', {'time': 13310, 'airQualityMetrics': {}, 'raw': time: 13310
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:45:17.887738', '0x43590ff4', {'time': 1730169613, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.21, 'channelUtilization': 0.7266667, 'airUtilTx': 0.8996111, 'uptimeSeconds': 5680110}, 'raw': time: 1730169613
+device_metrics {
+  battery_level: 101
+  voltage: 4.21
+  channel_utilization: 0.726666689
+  air_util_tx: 0.899611115
+  uptime_seconds: 5680110
+}
+}]
+['2024-12-17 11:45:18.541886', '0x433aca0c', {'time': 13370, 'airQualityMetrics': {}, 'raw': time: 13370
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:46:18.076833', '0x43590ff4', {'time': 1730169673, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.236, 'channelUtilization': 0.7266667, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680170}, 'raw': time: 1730169673
+device_metrics {
+  battery_level: 101
+  voltage: 4.236
+  channel_utilization: 0.726666689
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680170
+}
+}]
+['2024-12-17 11:46:18.729800', '0x433aca0c', {'time': 13430, 'airQualityMetrics': {}, 'raw': time: 13430
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:47:18.011940', '0x43590ff4', {'time': 1730169733, 'deviceMetrics': {'batteryLevel': 100, 'voltage': 4.197, 'channelUtilization': 0.7266667, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680230}, 'raw': time: 1730169733
+device_metrics {
+  battery_level: 100
+  voltage: 4.197
+  channel_utilization: 0.726666689
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680230
+}
+}]
+['2024-12-17 11:47:19.167948', '0x433aca0c', {'time': 13490, 'airQualityMetrics': {}, 'raw': time: 13490
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:48:17.986857', '0x43590ff4', {'time': 1730169793, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.226, 'channelUtilization': 0.7266667, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680290}, 'raw': time: 1730169793
+device_metrics {
+  battery_level: 101
+  voltage: 4.226
+  channel_utilization: 0.726666689
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680290
+}
+}]
+['2024-12-17 11:48:19.079251', '0x433aca0c', {'time': 13551, 'airQualityMetrics': {}, 'raw': time: 13551
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:49:18.139391', '0x43590ff4', {'time': 1730169853, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.207, 'channelUtilization': 0.7266667, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680350}, 'raw': time: 1730169853
+device_metrics {
+  battery_level: 101
+  voltage: 4.207
+  channel_utilization: 0.726666689
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680350
+}
+}]
+['2024-12-17 11:49:19.349044', '0x433aca0c', {'time': 13611, 'airQualityMetrics': {}, 'raw': time: 13611
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:50:18.176051', '0x43590ff4', {'time': 1730169913, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.233, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680410}, 'raw': time: 1730169913
+device_metrics {
+  battery_level: 101
+  voltage: 4.233
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680410
+}
+}]
+['2024-12-17 11:50:19.546327', '0x433aca0c', {'time': 13671, 'airQualityMetrics': {}, 'raw': time: 13671
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:51:18.094301', '0x43590ff4', {'time': 1730169973, 'deviceMetrics': {'batteryLevel': 100, 'voltage': 4.198, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680470}, 'raw': time: 1730169973
+device_metrics {
+  battery_level: 100
+  voltage: 4.198
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680470
+}
+}]
+['2024-12-17 11:51:19.791179', '0x433aca0c', {'time': 13731, 'airQualityMetrics': {}, 'raw': time: 13731
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:52:18.328518', '0x43590ff4', {'time': 1730170033, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.234, 'channelUtilization': 0.7266667, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680530}, 'raw': time: 1730170033
+device_metrics {
+  battery_level: 101
+  voltage: 4.234
+  channel_utilization: 0.726666689
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680530
+}
+}]
+['2024-12-17 11:52:19.903271', '0x433aca0c', {'time': 13791, 'airQualityMetrics': {}, 'raw': time: 13791
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:53:18.187626', '0x43590ff4', {'time': 1730170093, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.23, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680590}, 'raw': time: 1730170093
+device_metrics {
+  battery_level: 101
+  voltage: 4.23
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680590
+}
+}]
+['2024-12-17 11:53:20.000453', '0x433aca0c', {'time': 13851, 'airQualityMetrics': {}, 'raw': time: 13851
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:54:18.284607', '0x43590ff4', {'time': 1730170153, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.216, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680650}, 'raw': time: 1730170153
+device_metrics {
+  battery_level: 101
+  voltage: 4.216
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680650
+}
+}]
+['2024-12-17 11:54:20.259563', '0x433aca0c', {'time': 13912, 'airQualityMetrics': {}, 'raw': time: 13912
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:55:18.299481', '0x43590ff4', {'time': 1730170213, 'deviceMetrics': {'batteryLevel': 100, 'voltage': 4.195, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680710}, 'raw': time: 1730170213
+device_metrics {
+  battery_level: 100
+  voltage: 4.195
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680710
+}
+}]
+['2024-12-17 11:55:20.543486', '0x433aca0c', {'time': 13972, 'airQualityMetrics': {}, 'raw': time: 13972
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:56:18.329819', '0x43590ff4', {'time': 1730170273, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.209, 'airUtilTx': 0.88341665, 'uptimeSeconds': 5680771}, 'raw': time: 1730170273
+device_metrics {
+  battery_level: 101
+  voltage: 4.209
+  air_util_tx: 0.883416653
+  uptime_seconds: 5680771
+}
+}]
+['2024-12-17 11:56:20.547717', '0x433aca0c', {'time': 14032, 'airQualityMetrics': {}, 'raw': time: 14032
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:56:42.352466', '0x433aca0c', {'time': 14054, 'environmentMetrics': {'temperature': 27.472727, 'relativeHumidity': 32.332302, 'barometricPressure': 1024.2162, 'gasResistance': 214.86041, 'iaq': 73}, 'raw': time: 14054
+environment_metrics {
+  temperature: 27.4727268
+  relative_humidity: 32.3323021
+  barometric_pressure: 1024.21619
+  gas_resistance: 214.860413
+  iaq: 73
+}
+}]
+['2024-12-17 11:57:18.381800', '0x43590ff4', {'time': 1730170334, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.211, 'channelUtilization': 2.0266666, 'airUtilTx': 0.9000833, 'uptimeSeconds': 5680831}, 'raw': time: 1730170334
+device_metrics {
+  battery_level: 101
+  voltage: 4.211
+  channel_utilization: 2.02666664
+  air_util_tx: 0.900083303
+  uptime_seconds: 5680831
+}
+}]
+['2024-12-17 11:57:20.912808', '0x433aca0c', {'time': 14092, 'airQualityMetrics': {}, 'raw': time: 14092
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:57:21.725896', '0x433aca0c', {'time': 14092, 'deviceMetrics': {'batteryLevel': 92, 'voltage': 4.084, 'channelUtilization': 3.506667, 'airUtilTx': 0.91786116, 'uptimeSeconds': 14094}, 'raw': time: 14092
+device_metrics {
+  battery_level: 92
+  voltage: 4.084
+  channel_utilization: 3.5066669
+  air_util_tx: 0.917861164
+  uptime_seconds: 14094
+}
+}]
+['2024-12-17 11:58:18.518957', '0x43590ff4', {'time': 1730170394, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.209, 'airUtilTx': 0.9162778, 'uptimeSeconds': 5680891}, 'raw': time: 1730170394
+device_metrics {
+  battery_level: 101
+  voltage: 4.209
+  air_util_tx: 0.916277826
+  uptime_seconds: 5680891
+}
+}]
+['2024-12-17 11:58:21.063710', '0x433aca0c', {'time': 14152, 'airQualityMetrics': {}, 'raw': time: 14152
+air_quality_metrics {
+}
+}]
+['2024-12-17 11:59:18.609904', '0x43590ff4', {'time': 1730170454, 'deviceMetrics': {'batteryLevel': 100, 'voltage': 4.197, 'channelUtilization': 1.19, 'airUtilTx': 0.92399997, 'uptimeSeconds': 5680951}, 'raw': time: 1730170454
+device_metrics {
+  battery_level: 100
+  voltage: 4.197
+  channel_utilization: 1.19
+  air_util_tx: 0.923999965
+  uptime_seconds: 5680951
+}
+}]
+['2024-12-17 11:59:21.087826', '0x433aca0c', {'time': 14213, 'airQualityMetrics': {}, 'raw': time: 14213
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:00:18.631880', '0x43590ff4', {'time': 1730170514, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.245, 'airUtilTx': 0.92399997, 'uptimeSeconds': 5681011}, 'raw': time: 1730170514
+device_metrics {
+  battery_level: 101
+  voltage: 4.245
+  air_util_tx: 0.923999965
+  uptime_seconds: 5681011
+}
+}]
+['2024-12-17 12:00:21.269821', '0x433aca0c', {'time': 14273, 'airQualityMetrics': {}, 'raw': time: 14273
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:01:18.553967', '0x43590ff4', {'time': 1730170574, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.246, 'airUtilTx': 0.92399997, 'uptimeSeconds': 5681071}, 'raw': time: 1730170574
+device_metrics {
+  battery_level: 101
+  voltage: 4.246
+  air_util_tx: 0.923999965
+  uptime_seconds: 5681071
+}
+}]
+['2024-12-17 12:01:21.454923', '0x433aca0c', {'time': 14333, 'airQualityMetrics': {}, 'raw': time: 14333
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:02:18.537865', '0x43590ff4', {'time': 1730170634, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.232, 'airUtilTx': 0.92399997, 'uptimeSeconds': 5681131}, 'raw': time: 1730170634
+device_metrics {
+  battery_level: 101
+  voltage: 4.232
+  air_util_tx: 0.923999965
+  uptime_seconds: 5681131
+}
+}]
+['2024-12-17 12:02:21.713904', '0x433aca0c', {'time': 14393, 'airQualityMetrics': {}, 'raw': time: 14393
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:03:18.582003', '0x43590ff4', {'time': 1730170694, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.247, 'airUtilTx': 0.88250005, 'uptimeSeconds': 5681191}, 'raw': time: 1730170694
+device_metrics {
+  battery_level: 101
+  voltage: 4.247
+  air_util_tx: 0.882500052
+  uptime_seconds: 5681191
+}
+}]
+['2024-12-17 12:03:21.815899', '0x433aca0c', {'time': 14453, 'airQualityMetrics': {}, 'raw': time: 14453
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:04:18.639108', '0x43590ff4', {'time': 1730170754, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.226, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681251}, 'raw': time: 1730170754
+device_metrics {
+  battery_level: 101
+  voltage: 4.226
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681251
+}
+}]
+['2024-12-17 12:04:22.025008', '0x433aca0c', {'time': 14513, 'airQualityMetrics': {}, 'raw': time: 14513
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:05:18.863003', '0x43590ff4', {'time': 1730170814, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.236, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681311}, 'raw': time: 1730170814
+device_metrics {
+  battery_level: 101
+  voltage: 4.236
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681311
+}
+}]
+['2024-12-17 12:05:22.179172', '0x433aca0c', {'time': 14574, 'airQualityMetrics': {}, 'raw': time: 14574
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:06:18.850057', '0x43590ff4', {'time': 1730170874, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.211, 'channelUtilization': 1.48, 'airUtilTx': 0.8496389, 'uptimeSeconds': 5681371}, 'raw': time: 1730170874
+device_metrics {
+  battery_level: 101
+  voltage: 4.211
+  channel_utilization: 1.48
+  air_util_tx: 0.849638879
+  uptime_seconds: 5681371
+}
+}]
+['2024-12-17 12:06:23.707329', '0x433aca0c', {'time': 14634, 'airQualityMetrics': {}, 'raw': time: 14634
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:07:18.993163', '0x43590ff4', {'time': 1730170934, 'deviceMetrics': {'batteryLevel': 99, 'voltage': 4.182, 'channelUtilization': 2.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681431}, 'raw': time: 1730170934
+device_metrics {
+  battery_level: 99
+  voltage: 4.182
+  channel_utilization: 2.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681431
+}
+}]
+['2024-12-17 12:07:22.642923', '0x433aca0c', {'time': 14694, 'airQualityMetrics': {}, 'raw': time: 14694
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:08:18.927110', '0x43590ff4', {'time': 1730170994, 'deviceMetrics': {'batteryLevel': 99, 'voltage': 4.189, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681491}, 'raw': time: 1730170994
+device_metrics {
+  battery_level: 99
+  voltage: 4.189
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681491
+}
+}]
+['2024-12-17 12:08:22.824170', '0x433aca0c', {'time': 14754, 'airQualityMetrics': {}, 'raw': time: 14754
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:09:19.108439', '0x43590ff4', {'time': 1730171054, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.237, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681551}, 'raw': time: 1730171054
+device_metrics {
+  battery_level: 101
+  voltage: 4.237
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681551
+}
+}]
+['2024-12-17 12:09:22.926413', '0x433aca0c', {'time': 14814, 'airQualityMetrics': {}, 'raw': time: 14814
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:10:19.004187', '0x43590ff4', {'time': 1730171114, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.217, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681611}, 'raw': time: 1730171114
+device_metrics {
+  battery_level: 101
+  voltage: 4.217
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681611
+}
+}]
+['2024-12-17 12:10:23.370365', '0x433aca0c', {'time': 14875, 'airQualityMetrics': {}, 'raw': time: 14875
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:11:19.201126', '0x43590ff4', {'time': 1730171174, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.228, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681671}, 'raw': time: 1730171174
+device_metrics {
+  battery_level: 101
+  voltage: 4.228
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681671
+}
+}]
+['2024-12-17 12:11:23.378386', '0x433aca0c', {'time': 14935, 'airQualityMetrics': {}, 'raw': time: 14935
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:12:19.156358', '0x43590ff4', {'time': 1730171234, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.213, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681731}, 'raw': time: 1730171234
+device_metrics {
+  battery_level: 101
+  voltage: 4.213
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681731
+}
+}]
+['2024-12-17 12:12:23.810544', '0x433aca0c', {'time': 14995, 'airQualityMetrics': {}, 'raw': time: 14995
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:13:19.126383', '0x43590ff4', {'time': 1730171294, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.219, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681791}, 'raw': time: 1730171294
+device_metrics {
+  battery_level: 101
+  voltage: 4.219
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681791
+}
+}]
+['2024-12-17 12:13:23.741389', '0x433aca0c', {'time': 15055, 'airQualityMetrics': {}, 'raw': time: 15055
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:14:19.281208', '0x43590ff4', {'time': 1730171354, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.225, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5681851}, 'raw': time: 1730171354
+device_metrics {
+  battery_level: 101
+  voltage: 4.225
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5681851
+}
+}]
+['2024-12-17 12:14:23.827582', '0x433aca0c', {'time': 15115, 'airQualityMetrics': {}, 'raw': time: 15115
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:14:42.699287', '0x433aca0c', {'time': 15134, 'environmentMetrics': {'temperature': 27.561073, 'relativeHumidity': 32.090725, 'barometricPressure': 1023.77167, 'gasResistance': 216.8335, 'iaq': 67}, 'raw': time: 15134
+environment_metrics {
+  temperature: 27.5610733
+  relative_humidity: 32.0907249
+  barometric_pressure: 1023.77167
+  gas_resistance: 216.833496
+  iaq: 67
+}
+}]
+['2024-12-17 12:15:19.250543', '0x43590ff4', {'time': 1730171414, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.204, 'channelUtilization': 2.7533333, 'airUtilTx': 0.88297224, 'uptimeSeconds': 5681911}, 'raw': time: 1730171414
+device_metrics {
+  battery_level: 101
+  voltage: 4.204
+  channel_utilization: 2.75333333
+  air_util_tx: 0.88297224
+  uptime_seconds: 5681911
+}
+}]
+['2024-12-17 12:15:24.204639', '0x433aca0c', {'time': 15175, 'airQualityMetrics': {}, 'raw': time: 15175
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:15:25.106915', '0x433aca0c', {'time': 15176, 'deviceMetrics': {'batteryLevel': 91, 'voltage': 4.076, 'channelUtilization': 2.7533333, 'airUtilTx': 0.91238886, 'uptimeSeconds': 15177}, 'raw': time: 15176
+device_metrics {
+  battery_level: 91
+  voltage: 4.076
+  channel_utilization: 2.75333333
+  air_util_tx: 0.912388861
+  uptime_seconds: 15177
+}
+}]
+['2024-12-17 12:16:19.393466', '0x43590ff4', {'time': 1730171474, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.209, 'channelUtilization': 2.6983333, 'airUtilTx': 0.8991667, 'uptimeSeconds': 5681971}, 'raw': time: 1730171474
+device_metrics {
+  battery_level: 101
+  voltage: 4.209
+  channel_utilization: 2.69833326
+  air_util_tx: 0.899166703
+  uptime_seconds: 5681971
+}
+}]
+['2024-12-17 12:16:24.279659', '0x433aca0c', {'time': 15236, 'airQualityMetrics': {}, 'raw': time: 15236
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:17:19.343682', '0x43590ff4', {'time': 1730171534, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.218, 'channelUtilization': 0.7266667, 'airUtilTx': 0.8991667, 'uptimeSeconds': 5682031}, 'raw': time: 1730171534
+device_metrics {
+  battery_level: 101
+  voltage: 4.218
+  channel_utilization: 0.726666689
+  air_util_tx: 0.899166703
+  uptime_seconds: 5682031
+}
+}]
+['2024-12-17 12:17:24.537793', '0x433aca0c', {'time': 15296, 'airQualityMetrics': {}, 'raw': time: 15296
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:18:19.417504', '0x43590ff4', {'time': 1730171594, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.223, 'channelUtilization': 0.7266667, 'airUtilTx': 0.8991667, 'uptimeSeconds': 5682092}, 'raw': time: 1730171594
+device_metrics {
+  battery_level: 101
+  voltage: 4.223
+  channel_utilization: 0.726666689
+  air_util_tx: 0.899166703
+  uptime_seconds: 5682092
+}
+}]
+['2024-12-17 12:18:24.650769', '0x433aca0c', {'time': 15356, 'airQualityMetrics': {}, 'raw': time: 15356
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:19:19.455771', '0x43590ff4', {'time': 1730171655, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.212, 'channelUtilization': 0.7266667, 'airUtilTx': 0.8991667, 'uptimeSeconds': 5682152}, 'raw': time: 1730171655
+device_metrics {
+  battery_level: 101
+  voltage: 4.212
+  channel_utilization: 0.726666689
+  air_util_tx: 0.899166703
+  uptime_seconds: 5682152
+}
+}]
+['2024-12-17 12:19:24.771985', '0x433aca0c', {'time': 15416, 'airQualityMetrics': {}, 'raw': time: 15416
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:20:19.557683', '0x43590ff4', {'time': 1730171715, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.228, 'airUtilTx': 0.8991667, 'uptimeSeconds': 5682212}, 'raw': time: 1730171715
+device_metrics {
+  battery_level: 101
+  voltage: 4.228
+  air_util_tx: 0.899166703
+  uptime_seconds: 5682212
+}
+}]
+['2024-12-17 12:20:24.918082', '0x433aca0c', {'time': 15476, 'airQualityMetrics': {}, 'raw': time: 15476
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:21:19.483808', '0x43590ff4', {'time': 1730171775, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.213, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682272}, 'raw': time: 1730171775
+device_metrics {
+  battery_level: 101
+  voltage: 4.213
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682272
+}
+}]
+['2024-12-17 12:21:25.264922', '0x433aca0c', {'time': 15537, 'airQualityMetrics': {}, 'raw': time: 15537
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:22:19.554737', '0x43590ff4', {'time': 1730171835, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.21, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682332}, 'raw': time: 1730171835
+device_metrics {
+  battery_level: 101
+  voltage: 4.21
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682332
+}
+}]
+['2024-12-17 12:22:25.543083', '0x433aca0c', {'time': 15597, 'airQualityMetrics': {}, 'raw': time: 15597
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:23:19.577849', '0x43590ff4', {'time': 1730171895, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.217, 'channelUtilization': 0.7266667, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682392}, 'raw': time: 1730171895
+device_metrics {
+  battery_level: 101
+  voltage: 4.217
+  channel_utilization: 0.726666689
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682392
+}
+}]
+['2024-12-17 12:23:25.551910', '0x433aca0c', {'time': 15657, 'airQualityMetrics': {}, 'raw': time: 15657
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:24:19.591813', '0x43590ff4', {'time': 1730171955, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.256, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682452}, 'raw': time: 1730171955
+device_metrics {
+  battery_level: 101
+  voltage: 4.256
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682452
+}
+}]
+['2024-12-17 12:24:26.106594', '0x433aca0c', {'time': 15717, 'airQualityMetrics': {}, 'raw': time: 15717
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:25:19.640046', '0x43590ff4', {'time': 1730172015, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.219, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682512}, 'raw': time: 1730172015
+device_metrics {
+  battery_level: 101
+  voltage: 4.219
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682512
+}
+}]
+['2024-12-17 12:25:25.927027', '0x433aca0c', {'time': 15777, 'airQualityMetrics': {}, 'raw': time: 15777
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:26:19.710788', '0x43590ff4', {'time': 1730172075, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.241, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682572}, 'raw': time: 1730172075
+device_metrics {
+  battery_level: 101
+  voltage: 4.241
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682572
+}
+}]
+['2024-12-17 12:26:26.286008', '0x433aca0c', {'time': 15837, 'airQualityMetrics': {}, 'raw': time: 15837
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:27:19.828030', '0x43590ff4', {'time': 1730172135, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.248, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682632}, 'raw': time: 1730172135
+device_metrics {
+  battery_level: 101
+  voltage: 4.248
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682632
+}
+}]
+['2024-12-17 12:27:26.280257', '0x433aca0c', {'time': 15898, 'airQualityMetrics': {}, 'raw': time: 15898
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:28:19.819956', '0x43590ff4', {'time': 1730172195, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.203, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682692}, 'raw': time: 1730172195
+device_metrics {
+  battery_level: 101
+  voltage: 4.203
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682692
+}
+}]
+['2024-12-17 12:28:26.546120', '0x433aca0c', {'time': 15958, 'airQualityMetrics': {}, 'raw': time: 15958
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:29:19.870193', '0x43590ff4', {'time': 1730172255, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.252, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682752}, 'raw': time: 1730172255
+device_metrics {
+  battery_level: 101
+  voltage: 4.252
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682752
+}
+}]
+['2024-12-17 12:29:26.727503', '0x433aca0c', {'time': 16018, 'airQualityMetrics': {}, 'raw': time: 16018
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:30:20.007117', '0x43590ff4', {'time': 1730172315, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.25, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682812}, 'raw': time: 1730172315
+device_metrics {
+  battery_level: 101
+  voltage: 4.25
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682812
+}
+}]
+['2024-12-17 12:30:26.748155', '0x433aca0c', {'time': 16078, 'airQualityMetrics': {}, 'raw': time: 16078
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:31:20.032027', '0x43590ff4', {'time': 1730172375, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.217, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682872}, 'raw': time: 1730172375
+device_metrics {
+  battery_level: 101
+  voltage: 4.217
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682872
+}
+}]
+['2024-12-17 12:31:27.340293', '0x433aca0c', {'time': 16138, 'airQualityMetrics': {}, 'raw': time: 16138
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:32:19.898328', '0x43590ff4', {'time': 1730172435, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.24, 'channelUtilization': 1.48, 'airUtilTx': 0.86630553, 'uptimeSeconds': 5682932}, 'raw': time: 1730172435
+device_metrics {
+  battery_level: 101
+  voltage: 4.24
+  channel_utilization: 1.48
+  air_util_tx: 0.86630553
+  uptime_seconds: 5682932
+}
+}]
+['2024-12-17 12:32:27.265351', '0x433aca0c', {'time': 16199, 'airQualityMetrics': {}, 'raw': time: 16199
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:32:42.903089', '0x433aca0c', {'time': 16214, 'environmentMetrics': {'temperature': 27.684757, 'relativeHumidity': 31.905302, 'barometricPressure': 1023.5759, 'gasResistance': 221.33406, 'iaq': 68}, 'raw': time: 16214
+environment_metrics {
+  temperature: 27.6847572
+  relative_humidity: 31.905302
+  barometric_pressure: 1023.57593
+  gas_resistance: 221.334061
+  iaq: 68
+}
+}]
+['2024-12-17 12:33:19.939174', '0x43590ff4', {'time': 1730172495, 'deviceMetrics': {'batteryLevel': 100, 'voltage': 4.197, 'channelUtilization': 3.506667, 'airUtilTx': 0.88297224, 'uptimeSeconds': 5682992}, 'raw': time: 1730172495
+device_metrics {
+  battery_level: 100
+  voltage: 4.197
+  channel_utilization: 3.5066669
+  air_util_tx: 0.88297224
+  uptime_seconds: 5682992
+}
+}]
+['2024-12-17 12:33:27.478121', '0x433aca0c', {'time': 16259, 'airQualityMetrics': {}, 'raw': time: 16259
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:33:28.156453', '0x433aca0c', {'time': 16259, 'deviceMetrics': {'batteryLevel': 91, 'voltage': 4.071, 'channelUtilization': 3.506667, 'airUtilTx': 0.91238886, 'uptimeSeconds': 16260}, 'raw': time: 16259
+device_metrics {
+  battery_level: 91
+  voltage: 4.071
+  channel_utilization: 3.5066669
+  air_util_tx: 0.912388861
+  uptime_seconds: 16260
+}
+}]
+['2024-12-17 12:34:19.980088', '0x43590ff4', {'time': 1730172555, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.268, 'channelUtilization': 3.4516666, 'airUtilTx': 0.8991667, 'uptimeSeconds': 5683052}, 'raw': time: 1730172555
+device_metrics {
+  battery_level: 101
+  voltage: 4.268
+  channel_utilization: 3.45166659
+  air_util_tx: 0.899166703
+  uptime_seconds: 5683052
+}
+}]
+['2024-12-17 12:34:27.734579', '0x433aca0c', {'time': 16319, 'airQualityMetrics': {}, 'raw': time: 16319
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:35:20.020178', '0x43590ff4', {'time': 1730172615, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.219, 'channelUtilization': 1.48, 'airUtilTx': 0.8991667, 'uptimeSeconds': 5683112}, 'raw': time: 1730172615
+device_metrics {
+  battery_level: 101
+  voltage: 4.219
+  channel_utilization: 1.48
+  air_util_tx: 0.899166703
+  uptime_seconds: 5683112
+}
+}]
+['2024-12-17 12:35:27.938458', '0x433aca0c', {'time': 16379, 'airQualityMetrics': {}, 'raw': time: 16379
+air_quality_metrics {
+}
+}]
+['2024-12-17 12:36:20.229394', '0x43590ff4', {'time': 1730172675, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.237, 'channelUtilization': 1.48, 'airUtilTx': 0.88250005, 'uptimeSeconds': 5683172}, 'raw': time: 1730172675
+device_metrics {
+  battery_level: 101
+  voltage: 4.237
+  channel_utilization: 1.48
+  air_util_tx: 0.882500052
+  uptime_seconds: 5683172
+}
+}]
+['2024-12-17 12:36:27.863598', '0x433aca0c', {'time': 16439, 'airQualityMetrics': {}, 'raw': time: 16439
+air_quality_metrics {
+}
+}]
