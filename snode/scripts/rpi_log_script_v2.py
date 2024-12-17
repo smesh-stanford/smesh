@@ -33,7 +33,14 @@ from meshtastic.serial_interface import SerialInterface
 # Creates new log file every time script is run and once every 1 hour
 on_receive_dt = datetime.now()
 
-def log_to_csv(filename, data):
+def log_to_csv(filename, data, headers):
+    # Write headers if file does not yet exist
+    if not os.path.exists(filename):
+        with open(filename, 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(headers)
+    
+    # Append data
     with open(filename, 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(data)
