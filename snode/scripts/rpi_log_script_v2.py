@@ -81,7 +81,7 @@ def format_telemetry_log(data_dict, telemetry_key):
     return data
 
 
-def log_to_csv_from_preset(filename, curr_date_time, from_node, data_dict, preset):
+def log_to_csv_from_preset(filename, curr_date_time, from_node, data_dict, preset, telemetry_key):
     """
     Use a set of expected preset data to log to csv file while accounting for missing data.
 
@@ -92,9 +92,10 @@ def log_to_csv_from_preset(filename, curr_date_time, from_node, data_dict, prese
     - data_dict: Dict, dictionary of keys with data values
     - data_to_log: list, data to log
     - preset: function handle, function to format data
+    - telemetry_key, str, telemetry type
     """
 
-    data_to_log = [curr_date_time, from_node] + preset(data_dict)
+    data_to_log = [curr_date_time, from_node] + preset(data_dict, telemetry_key)
     log_to_csv(filename, data_to_log)
 
 
@@ -137,7 +138,7 @@ def on_receive(packet, interface):
                     metrics = telemetry_data[telemetry_key]
                     print(f"Metrics: {metrics}")
                     log_to_csv_from_preset(f'{log_file_prefix}_{telemetry_key}_{str(on_receive_dt)}.csv', str(datetime.now()), 
-                                        from_node, metrics | signal_strength_data, format_telemetry_log)
+                                        from_node, metrics | signal_strength_data, format_telemetry_log, telemetry_key)
                     
                     expected_telemetry = True
                     break
