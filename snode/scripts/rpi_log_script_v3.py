@@ -145,7 +145,7 @@ def log_telemetry_to_csv(filename, curr_date_time, from_node, data_dict, telemet
         'deviceMetrics' : ['batteryLevel', 'voltage', 'channelUtilization', 'airUtilTx']
     }
 
-    expected_keys = expected_keys_dict[telemetry_key] + ['rxSnr', 'rxRssi', 'hopStart', 'hopLimit']
+    expected_keys = expected_keys_dict[telemetry_key] + ['rxSnr', 'rxRssi', 'rxTime', 'hopStart', 'hopLimit']
 
     data_to_log = [curr_date_time, from_node]
     for key in expected_keys:

@@ -1,0 +1,163 @@
+['2024-12-17 17:59:30.530475', '0x433b0b38', {'from': 1127942968, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\x91G\x00\x00"\x00', 'telemetry': {'time': 18321, 'airQualityMetrics': {}, 'raw': time: 18321
+air_quality_metrics {
+}
+}}, 'id': 254025962, 'rxTime': 1730192002, 'rxSnr': 6.25, 'hopLimit': 5, 'rxRssi': -18, 'hopStart': 5, 'raw': from: 1127942968
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\221G\000\000"\000"
+}
+id: 254025962
+rx_time: 1730192002
+rx_snr: 6.25
+hop_limit: 5
+rx_rssi: -18
+hop_start: 5
+, 'fromId': '!433b0b38', 'toId': '^all'}]
+['2024-12-17 17:59:30.536686', '0x433b0b38', {'from': 1127942968, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\x9dG\x00\x00\x1a \r\x1a\x88\xdaA\x15\xb9\xc2\nB\x1d\x07\xa2\x7fD%f\x15\x11C-)\\\x96@5\x00\x00p\xc08V', 'telemetry': {'time': 18333, 'environmentMetrics': {'temperature': 27.316456, 'relativeHumidity': 34.69016, 'barometricPressure': 1022.5317, 'gasResistance': 145.08359, 'voltage': 4.69875, 'current': -3.75, 'iaq': 86}, 'raw': time: 18333
+environment_metrics {
+  temperature: 27.3164558
+  relative_humidity: 34.6901588
+  barometric_pressure: 1022.53168
+  gas_resistance: 145.083588
+  voltage: 4.69875
+  current: -3.75
+  iaq: 86
+}
+}}, 'id': 2042939627, 'rxTime': 1730192015, 'rxSnr': 6.0, 'hopLimit': 5, 'rxRssi': -18, 'hopStart': 5, 'raw': from: 1127942968
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\235G\000\000\032 \r\032\210\332A\025\271\302\nB\035\007\242\177D%f\025\021C-)\\226@5\000\000p\3008V"
+}
+id: 2042939627
+rx_time: 1730192015
+rx_snr: 6
+hop_limit: 5
+rx_rssi: -18
+hop_start: 5
+, 'fromId': '!433b0b38', 'toId': '^all'}]
+['2024-12-17 17:59:30.541568', '0x336918e8', {'from': 862525672, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\rTJ\x00\x00"\x00', 'telemetry': {'time': 19028, 'airQualityMetrics': {}, 'raw': time: 19028
+air_quality_metrics {
+}
+}}, 'id': 1967639905, 'rxTime': 1730192023, 'rxSnr': 6.0, 'hopLimit': 5, 'rxRssi': -26, 'hopStart': 5, 'raw': from: 862525672
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\rTJ\000\000"\000"
+}
+id: 1967639905
+rx_time: 1730192023
+rx_snr: 6
+hop_limit: 5
+rx_rssi: -26
+hop_start: 5
+, 'fromId': '!336918e8', 'toId': '^all'}]
+['2024-12-17 17:59:30.546625', '0x433aca0c', {'from': 1127926284, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\x8d\'\x00\x00"\x00', 'telemetry': {'time': 10125, 'airQualityMetrics': {}, 'raw': time: 10125
+air_quality_metrics {
+}
+}}, 'id': 4198596065, 'rxTime': 1730192027, 'rxSnr': 6.5, 'hopLimit': 3, 'rxRssi': -6, 'hopStart': 3, 'raw': from: 1127926284
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\215'\000\000"\000"
+}
+id: 4198596065
+rx_time: 1730192027
+rx_snr: 6.5
+hop_limit: 3
+rx_rssi: -6
+hop_start: 3
+, 'fromId': '!433aca0c', 'toId': '^all'}]
+['2024-12-17 17:59:30.566992', '0x433b0b38', {'from': 1127942968, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\xcdG\x00\x00"\x00', 'telemetry': {'time': 18381, 'airQualityMetrics': {}, 'raw': time: 18381
+air_quality_metrics {
+}
+}}, 'id': 1245800684, 'rxTime': 1730192063, 'rxSnr': 6.0, 'hopLimit': 5, 'rxRssi': -18, 'hopStart': 5, 'raw': from: 1127942968
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\315G\000\000"\000"
+}
+id: 1245800684
+rx_time: 1730192063
+rx_snr: 6
+hop_limit: 5
+rx_rssi: -18
+hop_start: 5
+, 'fromId': '!433b0b38', 'toId': '^all'}]
+['2024-12-17 17:59:30.595804', '0x433b0b38', {'from': 1127942968, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\xcdG\x00\x00*\n-\xecQ\x96@5\x00\x00 \xc0', 'telemetry': {'time': 18381, 'powerMetrics': {'ch3Voltage': 4.6975, 'ch3Current': -2.5}, 'raw': time: 18381
+power_metrics {
+  ch3_voltage: 4.6975
+  ch3_current: -2.5
+}
+}}, 'id': 3373931757, 'rxTime': 1730192064, 'rxSnr': 6.0, 'hopLimit': 5, 'rxRssi': -19, 'hopStart': 5, 'raw': from: 1127942968
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\315G\000\000*\n-\354Q\226@5\000\000 \300"
+}
+id: 3373931757
+rx_time: 1730192064
+rx_snr: 6
+hop_limit: 5
+rx_rssi: -19
+hop_start: 5
+, 'fromId': '!433b0b38', 'toId': '^all'}]
+['2024-12-17 17:59:38.431316', '0x43590ff4', {'from': 1129910260, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\xc9\xa2 g\x12\x16\x08e\x15d;\x87@\x1d\xd0i\xc7@%\xe0\xc1\x06@(\xaa\x87\xdc\x02', 'telemetry': {'time': 1730192073, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.226, 'channelUtilization': 6.2316666, 'airUtilTx': 2.1055832, 'uptimeSeconds': 5702570}, 'raw': time: 1730192073
+device_metrics {
+  battery_level: 101
+  voltage: 4.226
+  channel_utilization: 6.23166656
+  air_util_tx: 2.10558319
+  uptime_seconds: 5702570
+}
+}}, 'id': 3251379607, 'rxTime': 1730192073, 'hopLimit': 5, 'priority': 'BACKGROUND', 'raw': from: 1129910260
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\311\242 g\022\026\010e\025d;\207@\035\320i\307@%\340\301\006@(\252\207\334\002"
+}
+id: 3251379607
+rx_time: 1730192073
+hop_limit: 5
+priority: BACKGROUND
+, 'fromId': '!43590ff4', 'toId': '^all'}]
+['2024-12-17 17:59:40.919210', '0x433b0b38', {'from': 1127942968, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\xdaG\x00\x00\x1a \rm\xa2\xdaA\x15\x04\x0b\nB\x1d|\xa2\x7fD%\xa9\x9b\x18C-)\\\x97@5\x00\x00\xa0\xc08:', 'telemetry': {'time': 18394, 'environmentMetrics': {'temperature': 27.32931, 'relativeHumidity': 34.510757, 'barometricPressure': 1022.5388, 'gasResistance': 152.60805, 'voltage': 4.73, 'current': -5.0, 'iaq': 58}, 'raw': time: 18394
+environment_metrics {
+  temperature: 27.3293095
+  relative_humidity: 34.5107574
+  barometric_pressure: 1022.53882
+  gas_resistance: 152.608047
+  voltage: 4.73
+  current: -5
+  iaq: 58
+}
+}}, 'id': 597712110, 'rxTime': 1730192075, 'rxSnr': 6.25, 'hopLimit': 5, 'rxRssi': -19, 'hopStart': 5, 'raw': from: 1127942968
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\332G\000\000\032 \rm\242\332A\025\004\013\nB\035|\242\177D%\251\233\030C-)\\227@5\000\000\240\3008:"
+}
+id: 597712110
+rx_time: 1730192075
+rx_snr: 6.25
+hop_limit: 5
+rx_rssi: -19
+hop_start: 5
+, 'fromId': '!433b0b38', 'toId': '^all'}]
+['2024-12-17 17:59:48.879467', '0x336918e8', {'from': 862525672, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\x90J\x00\x00"\x00', 'telemetry': {'time': 19088, 'airQualityMetrics': {}, 'raw': time: 19088
+air_quality_metrics {
+}
+}}, 'id': 3306752354, 'rxTime': 1730192083, 'rxSnr': 5.5, 'hopLimit': 5, 'rxRssi': -26, 'hopStart': 5, 'raw': from: 862525672
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\220J\000\000"\000"
+}
+id: 3306752354
+rx_time: 1730192083
+rx_snr: 5.5
+hop_limit: 5
+rx_rssi: -26
+hop_start: 5
+, 'fromId': '!336918e8', 'toId': '^all'}]
