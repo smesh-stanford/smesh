@@ -82,11 +82,13 @@ def log_to_csv(filename, data, headers):
     - headers: list, headers for the csv file
     """
     print_active_threads()
+    print("----")
 
     # global FILE_LOCK
     with FILE_LOCK:
         print(f"Current thread (with lock) at log_to_csv for {filename}: " + 
               f"{threading.current_thread().name} at {threading.current_thread().ident}")
+        print(f"Lock is: {FILE_LOCK}")
     
         # Write headers for new file
         if not os.path.exists(filename):
@@ -112,8 +114,10 @@ def log_to_txt(filename, data):
     """
     # global FILE_LOCK
     with FILE_LOCK:
-        print(f"Current thread at log_to_txt for {filename}: " + 
+        print(f"Current thread (with lock) at log_to_txt for {filename}: " + 
              f"{threading.current_thread().name} at {threading.current_thread().ident}")
+        print(f"Lock is: {FILE_LOCK}")
+        
         with open(filename, 'a') as file:
             file.write(f"{data}\n")
 
