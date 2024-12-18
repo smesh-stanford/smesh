@@ -43,6 +43,23 @@ FILE_LOCK = threading.Lock()
 HEARD_FROM_NODE_COUNTER = {}
 
 ################################################
+# Printing Helper Functions
+################################################
+
+def print_active_threads():
+    """
+    Prints all active threads.
+    """
+    print(f"[{datetime.now()}] Main thread:")
+    print(f"Main thread name: {threading.main_thread().name}, " + 
+          f"Main thread ID: {threading.main_thread().ident}, " + 
+          f"Is daemon: {threading.main_thread().daemon}")
+    print(f"[{datetime.now()}] Active threads:")
+    for thread in threading.enumerate():
+        print(f"Thread name: {thread.name}, Thread ID: {thread.ident}, Is daemon: {thread.daemon}")
+
+
+################################################
 # Logging Functions
 ################################################
 
@@ -60,8 +77,10 @@ def log_to_csv(filename, data, headers):
     - data: list, data to log
     - headers: list, headers for the csv file
     """
+    print_active_threads()
     
-    print(f"Current thread to log_to_csv: {threading.current_thread().name}")
+    print(f"Current thread at log_to_csv for {filename}: " + 
+          f"{threading.current_thread().name} at {threading.current_thread().ident}")
 
     # global FILE_LOCK
     with FILE_LOCK:
@@ -87,7 +106,7 @@ def log_to_txt(filename, data):
     - filename: str, path to the txt file
     - data: list, data to log
     """
-    print(f"Current thread to log_to_csv: {threading.current_thread().name}")
+    print(f"Current thread at log_to_txt for {filename}: {threading.current_thread().name}")
 
     # global FILE_LOCK
     with FILE_LOCK:
