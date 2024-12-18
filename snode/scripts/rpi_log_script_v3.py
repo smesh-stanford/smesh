@@ -47,6 +47,22 @@ HEARD_FROM_NODE_COUNTER = {}
 ################################################
 
 def log_to_csv(filename, data, headers):
+    """
+    Writes logs to csv file. Closes file after each write, which writes to disk.
+    The file lock ensures thread safety when multiple packets arrive at similar 
+    times.
+
+    If the file does not exist, it creates a new file and writes the headers.
+    Technically, headers can be None thereafter.
+
+    Parameters:
+    - filename: str, path to the csv file
+    - data: list, data to log
+    - headers: list, headers for the csv file
+    """
+    
+    print(f"Current thread to log_to_csv: {threading.current_thread().name}")
+
     # global FILE_LOCK
     with FILE_LOCK:
         # Write headers for new file
@@ -63,9 +79,16 @@ def log_to_csv(filename, data, headers):
 
 def log_to_txt(filename, data):
     """
-    Writes logs to txt file.
-    Closes file after each write, which writes to disk.
+    Writes logs to txt file. Closes file after each write, which writes to disk.
+    The file lock ensures thread safety when multiple packets arrive at similar
+    times.
+
+    Parameters:
+    - filename: str, path to the txt file
+    - data: list, data to log
     """
+    print(f"Current thread to log_to_csv: {threading.current_thread().name}")
+
     # global FILE_LOCK
     with FILE_LOCK:
         with open(filename, 'a') as file:
