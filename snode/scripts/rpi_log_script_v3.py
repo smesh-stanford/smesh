@@ -50,13 +50,17 @@ def print_active_threads():
     """
     Prints all active threads.
     """
-    print(f"[{datetime.now()}] Main thread:")
+    print(f"[{datetime.now()}] Main thread (should be the main python script):")
     print(f"Main thread name: {threading.main_thread().name}, " + 
           f"Main thread ID: {threading.main_thread().ident}, " + 
           f"Is daemon: {threading.main_thread().daemon}")
-    print(f"[{datetime.now()}] Active threads:")
+    print(f"[{datetime.now()}] There are {threading.active_count()} active threads:")
     for thread in threading.enumerate():
         print(f"Thread name: {thread.name}, Thread ID: {thread.ident}, Is daemon: {thread.daemon}")
+    print("Of which, current thread is:")
+    print(f"Current thread name: {threading.current_thread().name}, " +
+          f"Current thread ID: {threading.current_thread().ident}, " +
+          f"Is daemon: {threading.current_thread().daemon}")
 
 
 ################################################
@@ -78,12 +82,12 @@ def log_to_csv(filename, data, headers):
     - headers: list, headers for the csv file
     """
     print_active_threads()
-    
-    print(f"Current thread at log_to_csv for {filename}: " + 
-          f"{threading.current_thread().name} at {threading.current_thread().ident}")
 
     # global FILE_LOCK
     with FILE_LOCK:
+        print(f"Current thread (with lock) at log_to_csv for {filename}: " + 
+              f"{threading.current_thread().name} at {threading.current_thread().ident}")
+    
         # Write headers for new file
         if not os.path.exists(filename):
             with open(filename, 'w', newline='') as file:
@@ -106,10 +110,10 @@ def log_to_txt(filename, data):
     - filename: str, path to the txt file
     - data: list, data to log
     """
-    print(f"Current thread at log_to_txt for {filename}: {threading.current_thread().name}")
-
     # global FILE_LOCK
     with FILE_LOCK:
+        print(f"Current thread at log_to_txt for {filename}: " + 
+             f"{threading.current_thread().name} at {threading.current_thread().ident}")
         with open(filename, 'a') as file:
             file.write(f"{data}\n")
 
@@ -282,6 +286,9 @@ def main():
     # Subscribe to the data topic
     pub.subscribe(on_receive, "meshtastic.receive")
     print("Subscribed to meshtastic.receive")
+
+    # Print the current active threads
+    print_active_threads()
 
     # Keep the script running to listen for messages
     try:
