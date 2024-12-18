@@ -268,6 +268,11 @@ def main():
     ON_RECEIVE_DT = datetime.now()
     print(f"{ON_RECEIVE_DT} Raspberry Pi Logging Script started")
 
+    # Print the current active threads before starting
+    print("----\nBefore starting the script, the thread information is as follows:")
+    print_active_threads()
+    print("----")
+
     # Choose the serial port to listen to
     if len(sys.argv) < 2:
         print("Error: No serial port path provided.")
@@ -288,7 +293,9 @@ def main():
     print("Subscribed to meshtastic.receive")
 
     # Print the current active threads
+    print("----\nAfter subscribing to meshtastic.receive, the thread information is as follows:")
     print_active_threads()
+    print("----")
 
     # Keep the script running to listen for messages
     try:
