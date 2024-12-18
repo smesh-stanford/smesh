@@ -5,14 +5,15 @@ Changes post-Henry Coe Deployment:
 - Start new log file (with datetime appended) every time and every 1 hour this script is run.
 -- Purpose: 1) Detect RPi 4 crashes, 2) Prevent wearing out directory when writing to disk
 
-New changes in v2:
-- Error with `git pull` when file names have colons, so replaced underscores. So ':' becomes '_'
+New changes in v3:
+- Filename convension
 - Added headers in CSV data
-- Print out (stdout) both from and fromId from packets (should be same)
+- Handle LARK wind data (when available)
+- Safe threading for file writing operations
+- Heard from node counter
 
-Issues to address in v3:
+Issues to address in v4:
 - Place all data and log files into separate folders for better readibility
-- Handle LARK Wind data
 
 Authors: Lisa, Kirby, Rohan, Pete, Daniel
 Previous Authors: Joshua
@@ -37,6 +38,9 @@ ON_RECEIVE_DT = datetime.now()
 # in the file writing operations when multiple packets arrive
 # at similar times.
 FILE_LOCK = threading.Lock()
+
+# Dictionary to keep track of the number of times a node has been heard
+HEARD_FROM_NODE_COUNTER = {}
 
 ################################################
 # Logging Functions
@@ -102,6 +106,19 @@ def log_telemetry_to_csv(filename, curr_date_time, from_node, data_dict, telemet
     headers = ['datetime', 'fromNode'] + expected_keys
     log_to_csv(filename, data_to_log, headers)
 
+################################################
+# Counter Functions
+################################################
+
+def increment_heard_from_node_counter(from_node):
+    """
+    Increment the counter for the number of times a node has been heard.
+    """
+    global HEARD_FROM_NODE_COUNTER
+    if from_node in HEARD_FROM_NODE_COUNTER:
+        HEARD_FROM_NODE_COUNTER[from_node] += 1
+    else:
+        HEARD_FROM_NODE_COUNTER[from_node] = 1
 
 ################################################
 # Callback Functions
@@ -117,9 +134,8 @@ def on_receive(packet, interface):
     if (datetime.now() >= ON_RECEIVE_DT + timedelta(hours=1)):
         ON_RECEIVE_DT = datetime.now()
 
-    # print("All reachable nodes:", interface.nodes.keys())
-
     # nodeid is the last 4 hex digits of node connected via serial port
+    # (i.e., the node that is logging)
     nodeid = hex(interface.myInfo.my_node_num)[-4:]
 
     # TODO: create new folder for each type of telemetry
@@ -128,23 +144,34 @@ def on_receive(packet, interface):
     try:
         from_node = hex(packet['from'])
         print("\nFrom node:", from_node)
+
+        # Note any situation where the from_node and fromId are different
+        # Note that from is printed as 0x12345678, while fromId is printed 
+        # as !12345678. So, we only need the last 8 characters.
+        # Note also that the id is in decimal, not hex.
+        check_from_node = str(from_node)[-8:]
+        check_fromid_node = str(packet['fromId'])[-8:]
+        if check_from_node != check_fromid_node:
+            print("WARNING: from_node and fromId are different:" + \
+                    f"{check_from_node} != {check_fromid_node}")
+        
+        # Increment the counter for the number of times a node has been heard
+        increment_heard_from_node_counter(from_node)                   
         
         if packet['decoded']['portnum'] == 'TELEMETRY_APP':
             telemetry_data = packet['decoded']['telemetry']
             print(f"[{str(datetime.now())}] Packet from {from_node} (fromId: {packet['fromId']})")
 
-            # Note any situation where the from_node and fromId are different
-            if from_node != packet['fromId']:
-                print(f"WARNING: from_node and fromId are different: {from_node} != {packet['fromId']}")
-
             # Expected telemetry
             telemetry_list = ['environmentMetrics', 'airQualityMetrics', 'powerMetrics', 'deviceMetrics']
             expected_telemetry = False  # True if expected sensor telemetry received, else False
 
-            signal_strength_data = {key: packet[key] for key in ['rxSnr', 'rxRssi', 'hopLimit', 'hopStart'] if key in packet}
+            signal_keys = ['rxSnr', 'rxRssi', 'rxTime', 'hopLimit', 'hopStart']
+            signal_strength_data = {key: packet[key] for key in signal_keys if key in packet}
 
+            # Format datetime for filename
             # Format as 'YYYY-MM-DD_HH-MM-SS', such as '2024-12-17_13-07-56'
-            format_dt_str = ON_RECEIVE_DT.strftime("%Y-%m-%d_%H-%M-%S")    # Format datetime for filename
+            format_dt_str = ON_RECEIVE_DT.strftime("%Y-%m-%d_%H-%M-%S")    
 
             for telemetry_key in telemetry_list:
                 if telemetry_key in telemetry_data:
@@ -162,11 +189,18 @@ def on_receive(packet, interface):
             if not expected_telemetry:
                 print("Other packet")
                 print(f"Telemetry data: {telemetry_data}")
-                other_headers = [''] * len(telemetry_data)
-                log_to_csv(f'{log_file_prefix}_other_{format_dt_str}.csv', [str(datetime.now()), from_node, telemetry_data], other_headers)
+                # Empty headers for other data, since we don't know what it is a priori
+                other_headers = [''] * len(telemetry_data) 
+                log_to_csv(f'{log_file_prefix}_other_{format_dt_str}.csv', 
+                           [str(datetime.now()), from_node, telemetry_data], other_headers)
 
             # log telemetry data to txt file
-            log_to_txt(f'{log_file_prefix}_logs_{format_dt_str}.txt', [str(datetime.now()), from_node, packet])
+            log_to_txt(f'{log_file_prefix}_logs_{format_dt_str}.txt', 
+                       [str(datetime.now()), from_node, packet])
+
+            # Log the incremented counter dictionary to a text file
+            log_to_txt(f'{log_file_prefix}_heard_from_node_counter_{format_dt_str}.txt', 
+                       [str(datetime.now()), HEARD_FROM_NODE_COUNTER])
 
     except KeyError:
         print("ERROR: KeyError")
