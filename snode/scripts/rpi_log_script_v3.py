@@ -61,6 +61,7 @@ def print_active_threads():
     print(f"Current thread name: {threading.current_thread().name}, " +
           f"Current thread ID: {threading.current_thread().ident}, " +
           f"Is daemon: {threading.current_thread().daemon}")
+    print(f"Lock status of {FILE_LOCK}: {FILE_LOCK.locked()}")
 
 
 ################################################
@@ -88,7 +89,7 @@ def log_to_csv(filename, data, headers):
     with FILE_LOCK:
         print(f"Current thread (with lock) at log_to_csv for {filename}: " + 
               f"{threading.current_thread().name} at {threading.current_thread().ident}")
-        print(f"Lock is: {FILE_LOCK}")
+        print(f"Lock is: {FILE_LOCK} (locked: {FILE_LOCK.locked()})")
     
         # Write headers for new file
         if not os.path.exists(filename):
@@ -116,8 +117,8 @@ def log_to_txt(filename, data):
     with FILE_LOCK:
         print(f"Current thread (with lock) at log_to_txt for {filename}: " + 
              f"{threading.current_thread().name} at {threading.current_thread().ident}")
-        print(f"Lock is: {FILE_LOCK}")
-        
+        print(f"Lock is: {FILE_LOCK} (locked: {FILE_LOCK.locked()})")
+
         with open(filename, 'a') as file:
             file.write(f"{data}\n")
 
