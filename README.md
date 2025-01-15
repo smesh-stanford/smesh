@@ -168,6 +168,28 @@ Releases will be formatted as "XX.YY.ZZ" with the following scheme:
 - YY: minor feature change, new functions or classes 
 - ZZ: patches, bug fixes, optimizations
 
+*Pushing commits*
+Create a new branch following "task/feature-name", "bug/bug-name" and so forth
+
+A recommended workflow would be:
+```
+git stash
+git checkout main
+git pull
+git checkout (your branch)
+git stash pop
+git rebase origin/main
+Fix merge conflicts
+git push —force-with-lease
+```
+
+Prior to merging a PR, be sure to squash your commits. One way to do this is to run `git rebase -i` and replace everything but the first commit message with `s` for squash as so:
+```
+pick abc123 Commit message 1
+s def456 Commit message 2
+s ghi789 Commit message 3
+```
+
 *Notes for Contributions*
 - Before starting on some new big chunk of code, it it is optional but highly recommended to open an issue first
   to say "Hey, I think this idea X should be implemented and I'm starting work on it. My general plan is Y, any feedback
@@ -180,6 +202,7 @@ Releases will be formatted as "XX.YY.ZZ" with the following scheme:
 - If your other co-developers have comments on your PR please tweak as needed.
 - Please also enable "Allow edits by maintainers".
 - If your PR gets accepted you can request a "Contributor" role in the Meshtastic Discord
+
 # Usage (depreciated)
 ___
 `snode` is a Python package that contains all dependencies and code to read from snodes.
