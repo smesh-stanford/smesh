@@ -311,7 +311,7 @@ def main():
     # Subscribe to the data topic
     try:
         pub.subscribe(on_receive, "meshtastic.receive")
-        print("2Subscribed to meshtastic.receive")
+        print("Subscribed to meshtastic.receive")
     except Exception as e:
         print(f"Unable to subscribe: {e}")
 
