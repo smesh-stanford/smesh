@@ -161,6 +161,25 @@ ___
      ```
   7. Enter the password: `smesh`.
 
+# Contributing
+*Cutting Releases*
+Releases will be formatted as "XX.YY.ZZ" with the following scheme: 
+- XX: major feature release, breaking changes
+- YY: minor feature change, new functions or classes 
+- ZZ: patches, bug fixes, optimizations
+
+*Notes for Contributions*
+- Before starting on some new big chunk of code, it it is optional but highly recommended to open an issue first
+  to say "Hey, I think this idea X should be implemented and I'm starting work on it. My general plan is Y, any feedback
+  is appreciated." This will allow other devs to potentially save you time by not accidentially duplicating work etc...
+- Please do not check in files that don't have real changes
+- Please do not reformat lines that you didn't have to change the code on
+- We recommend using the [Visual Studio Code](https://platformio.org/install/ide?install=vscode) editor along with the ['Trunk Check' extension](https://marketplace.visualstudio.com/items?itemName=trunk.io) (In beta for windows, WSL2 for the linux version),
+  because it automatically follows our indentation rules and its auto reformatting will not cause spurious changes to lines.
+- If your PR fixes a bug, mention "fixes #bugnum" somewhere in your pull request description.
+- If your other co-developers have comments on your PR please tweak as needed.
+- Please also enable "Allow edits by maintainers".
+- If your PR gets accepted you can request a "Contributor" role in the Meshtastic Discord
 # Usage (depreciated)
 ___
 `snode` is a Python package that contains all dependencies and code to read from snodes.
@@ -175,3 +194,4 @@ To run any Python code:
 2. Enter the package you're using, e.g., `cd snode`
 3. Install the Python dependencies the code needs, i.e., `poetry install`
 4. Run a Python script, i.e., `poetry run python PATH/TO/SCRIPT.PY`
+
