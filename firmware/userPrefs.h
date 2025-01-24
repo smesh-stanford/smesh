@@ -54,7 +54,7 @@
 // #define USERPREFS_CONFIG_OWNER_LONG_NAME "My Long Name"
 // #define USERPREFS_CONFIG_OWNER_SHORT_NAME "MLN"
 
-#define USERPREFS_SPLASH_TITLE "SMesh 1.8"
+#define USERPREFS_SPLASH_TITLE "SMesh 2.0.0"
 // #define icon_width 34
 // #define icon_height 29
 // #define USERPREFS_HAS_SPLASH
