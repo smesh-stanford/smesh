@@ -309,8 +309,11 @@ def main():
     print("SerialInterface setup for listening.")
 
     # Subscribe to the data topic
-    pub.subscribe(on_receive, "meshtastic.receive")
-    print("Subscribed to meshtastic.receive")
+    try:
+        pub.subscribe(on_receive, "meshtastic.receive")
+        print("Subscribed to meshtastic.receive")
+    except Exception as e:
+        print(f"Unable to subscribe: {e}")
 
     # Print the current active threads
     print("----\nAfter subscribing to meshtastic.receive, the thread information is as follows:")
