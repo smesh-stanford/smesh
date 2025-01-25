@@ -161,6 +161,32 @@ ___
      ```
   7. Enter the password: `smesh`.
 
+# Contributing
+*Cutting Releases*
+Releases will be formatted as "XX.YY.ZZ" with the following scheme: 
+- XX: major feature release, breaking changes
+- YY: minor feature change, new functions or classes 
+- ZZ: patches, bug fixes, optimizations
+*Pushing commits*
+Create a new branch following "task/feature-name", "bug/bug-name" and so forth
+A recommended workflow would be:
+```
+git stash
+git checkout main
+git pull
+git checkout (your branch)
+git stash pop
+git rebase -i main
+Fix merge conflicts
+git push -—force-with-lease
+```
+Prior to merging a PR, be sure to squash your commits. One way to do this is to run `git rebase -i` and replace everything but the first commit message with `s` for squash as so:
+```
+pick abc123 Commit message 1
+s def456 Commit message 2
+s ghi789 Commit message 3
+```
+
 # Usage (depreciated)
 ___
 `snode` is a Python package that contains all dependencies and code to read from snodes.
