@@ -1,23 +1,19 @@
 """
-Updated Raspberry Pi 4 Logging Script
+Raspberry Pi 4/Zero Logging Script
 
-Changes post-Henry Coe Deployment:
-- Start new log file (with datetime appended) every time and every 1 hour this script is run.
--- Purpose: 1) Detect RPi 4 crashes, 2) Prevent wearing out directory when writing to disk
+Changes in v4:
+- Added timeout on the file lock
+- Try/except catches general exceptions (Exception)
+- Watch dog timer (WDT) and recovery by unsubscribing and subscribing to pub
+- Counting number of times heard from each node
 
-New changes in v3:
-- Filename convension
-- Added headers in CSV data
-- Handle LARK wind data (when available)
-- Safe threading for file writing operations
-- Heard from node counter
-
-Issues to address in v4:
-- Place all data and log files into separate folders for better readibility
+Future Improvements:
+- Use SQLite for logging data
+- Add keyboard node logging
 
 Authors: Lisa, Kirby, Rohan, Pete, Daniel
 Previous Authors: Joshua
-Last Updated: 12/17/2024
+Last Updated: 12/29/2024
 """
 
 import time
@@ -30,6 +26,8 @@ from pubsub import pub
 from meshtastic.serial_interface import SerialInterface
 # from meshtastic import portnums_pb2
 
+# Create new folder for each type of telemetry
+LOG_FILE_PREFIX = ""
 # Global variable for unique datetime identifier in log file name
 # Creates new log file every time script is run and once every 1 hour
 ON_RECEIVE_DT = datetime.now()
@@ -41,6 +39,31 @@ FILE_LOCK = threading.Lock()
 
 # Dictionary to keep track of the number of times a node has been heard
 HEARD_FROM_NODE_COUNTER = {}
+
+WDT = datetime.now()
+
+def create_new_logging_dir(node_id):
+
+    """
+    Ensures that a directory is created prior to running any logging functions
+    Parameters: 
+    - node_id: the logger node ID
+    """
+    global LOG_FILE_PREFIX 
+    # create new directory if the current one doesn't exist including the nodeid
+    if not os.path.exists(LOG_FILE_PREFIX) or LOG_FILE_PREFIX == "":
+        format_dt_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        LOG_FILE_PREFIX = f'./data-{format_dt_str}/{node_id}/'
+        print(f'Created new logging directory {LOG_FILE_PREFIX}')
+        # update the directory because either the block was corrupted for the provided directory OR
+        # we have not yet defined and created the desired directory
+
+        try:
+            os.makedirs(LOG_FILE_PREFIX, exist_ok=False) # also creates any relevant parent directories
+        except OSError as e:
+            # fail LOUDLY! if we can no longer write data over :-)
+            raise SystemError(f"Could not create directory path at '{LOG_FILE_PREFIX}'. Threw error {e}")
+
 
 ################################################
 # Printing Helper Functions
@@ -86,22 +109,26 @@ def log_to_csv(filename, data, headers):
     print("----")
 
     # global FILE_LOCK
-    with FILE_LOCK:
-        print(f"Current thread (with lock) at log_to_csv for {filename}: " + 
-              f"{threading.current_thread().name} at {threading.current_thread().ident}")
-        print(f"Lock is: {FILE_LOCK} (locked: {FILE_LOCK.locked()})")
+    if FILE_LOCK.acquire(timeout=5):  # Timeout set to 5 seconds
+        try:
+            print(f"Current thread (with lock) at log_to_csv for {filename}: " +
+                f"{threading.current_thread().name} at {threading.current_thread().ident}")
+            print(f"Lock is: {FILE_LOCK} (locked: {FILE_LOCK.locked()})")
     
-        # Write headers for new file
-        if not os.path.exists(filename):
-            with open(filename, 'w', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow(headers)
-        
-        # Append data
-        with open(filename, 'a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(data)
+            # Write headers for new file
+            if not os.path.exists(filename):
+                with open(filename, 'w', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerow(headers)
 
+            # Append data
+            with open(filename, 'a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(data)
+        finally:
+                FILE_LOCK.release()
+    else:
+        print(f"ERROR: Could not acquire file lock for {filename} within timeout period.")
 
 def log_to_txt(filename, data):
     """
@@ -113,14 +140,20 @@ def log_to_txt(filename, data):
     - filename: str, path to the txt file
     - data: list, data to log
     """
-    # global FILE_LOCK
-    with FILE_LOCK:
-        print(f"Current thread (with lock) at log_to_txt for {filename}: " + 
-             f"{threading.current_thread().name} at {threading.current_thread().ident}")
-        print(f"Lock is: {FILE_LOCK} (locked: {FILE_LOCK.locked()})")
 
-        with open(filename, 'a') as file:
-            file.write(f"{data}\n")
+    # global FILE_LOCK
+    if FILE_LOCK.acquire(timeout=5):  # Timeout set to 5 seconds
+        try:
+            print(f"Current thread (with lock) at log_to_txt for {filename}: " +
+             f"{threading.current_thread().name} at {threading.current_thread().ident}")
+            print(f"Lock is: {FILE_LOCK} (locked: {FILE_LOCK.locked()})")
+
+            with open(filename, 'a') as file:
+                file.write(f"{data}\n")
+        finally:
+            FILE_LOCK.release()
+    else:
+        print(f"ERROR: Could not acquire file lock for {filename} within timeout period.")
 
 
 def log_telemetry_to_csv(filename, curr_date_time, from_node, data_dict, telemetry_key):
@@ -179,21 +212,22 @@ def on_receive(packet, interface):
     """
     Callback reads BME688 and PMSA003I data packets over the e.g. serial interface.
     """
+    #Feed the watchdog timer
+    global WDT
+    WDT = datetime.now()
+
     # Datetime unique identifier for log filename
     global ON_RECEIVE_DT
     # Update datetime identifier (new file) once every 1 hour of logging
     if (datetime.now() >= ON_RECEIVE_DT + timedelta(hours=1)):
         ON_RECEIVE_DT = datetime.now()
 
-    # nodeid is the last 4 hex digits of node connected via serial port
-    # (i.e., the node that is logging)
-    nodeid = hex(interface.myInfo.my_node_num)[-4:]
-
-    # TODO: create new folder for each type of telemetry
-    log_file_prefix = f'./data/{nodeid}'
-
     try:
+        # nodeid is the last 4 hex digits of node connected via serial port
+        # (i.e., the node that is logging)
+        logger_node_id = hex(interface.myInfo.my_node_num)[-4:]
         from_node = hex(packet['from'])
+
         print("\nFrom node:", from_node)
 
         # Note any situation where the from_node and fromId are different
@@ -215,7 +249,7 @@ def on_receive(packet, interface):
 
             # Expected telemetry
             telemetry_list = ['environmentMetrics', 'airQualityMetrics', 'powerMetrics', 'deviceMetrics']
-            expected_telemetry = False  # True if expected sensor telemetry received, else False
+            # expected_telemetry = False  # True if expected sensor telemetry received, else False
 
             signal_keys = ['rxSnr', 'rxRssi', 'rxTime', 'hopLimit', 'hopStart']
             signal_strength_data = {key: packet[key] for key in signal_keys if key in packet}
@@ -224,6 +258,9 @@ def on_receive(packet, interface):
             # Format as 'YYYY-MM-DD_HH-MM-SS', such as '2024-12-17_13-07-56'
             format_dt_str = ON_RECEIVE_DT.strftime("%Y-%m-%d_%H-%M-%S")    
 
+            # create new directories if necessary to log data
+            create_new_logging_dir(logger_node_id)
+
             for telemetry_key in telemetry_list:
                 if telemetry_key in telemetry_data:
                     print(f"Telemetry key: {telemetry_key}")
@@ -231,26 +268,28 @@ def on_receive(packet, interface):
                     metrics = telemetry_data[telemetry_key]
                     print(f"Metrics: {metrics}")
 
-                    log_telemetry_to_csv(f'{log_file_prefix}_{telemetry_key}_{format_dt_str}.csv', str(datetime.now()), 
+                    log_telemetry_to_csv(f'{LOG_FILE_PREFIX}{telemetry_key}_{format_dt_str}.csv', str(datetime.now()), 
                                         from_node, metrics | signal_strength_data, telemetry_key)
                     
-                    expected_telemetry = True
+                    # expected_telemetry = True
                     break
                 
-            if not expected_telemetry:
-                print("Other packet")
-                print(f"Telemetry data: {telemetry_data}")
-                # Empty headers for other data, since we don't know what it is a priori
-                other_headers = [''] * len(telemetry_data) 
-                log_to_csv(f'{log_file_prefix}_other_{format_dt_str}.csv', 
-                           [str(datetime.now()), from_node, telemetry_data], other_headers)
+
+            # Commented! Needs to be tested-- last issues documented at burnbot
+            # if not expected_telemetry:
+            #     print("Other packet")
+            #     print(f"Telemetry data: {telemetry_data}")
+            #     # Empty headers for other data, since we don't know what it is a priori
+            #     other_headers = [''] * len(telemetry_data) 
+            #     log_to_csv(f'{LOG_FILE_PREFIX}_other_{format_dt_str}.csv', 
+            #                [str(datetime.now()), from_node, telemetry_data], other_headers, logger_node_id)
 
             # log telemetry data to txt file
-            log_to_txt(f'{log_file_prefix}_logs_{format_dt_str}.txt', 
+            log_to_txt(f'{LOG_FILE_PREFIX}logs_{format_dt_str}.txt', 
                        [str(datetime.now()), from_node, packet])
 
             # Log the incremented counter dictionary to a text file
-            log_to_txt(f'{log_file_prefix}_heard_from_node_counter_{format_dt_str}.txt', 
+            log_to_txt(f'{LOG_FILE_PREFIX}heard_from_node_counter_{format_dt_str}.txt', 
                        [str(datetime.now()), HEARD_FROM_NODE_COUNTER])
 
     except KeyError:
@@ -259,6 +298,9 @@ def on_receive(packet, interface):
     except UnicodeDecodeError:
         print("ERROR: UnicodeDecodeError")
         pass  # Ignore UnicodeDecodeError silently
+    except Exception as e:
+        print(f"ERROR: Unexpected error: {e}")
+        pass  # Ignore unexpected errors silently
 
     print(f"\nReceived Packet: {packet}")
     print("-"*30, "\n")     # Separate packets more visibly
@@ -270,6 +312,7 @@ def on_receive(packet, interface):
 
 # Runs every time script is started
 def main():
+    global WDT
     ON_RECEIVE_DT = datetime.now()
     print(f"{ON_RECEIVE_DT} Raspberry Pi Logging Script started")
 
@@ -294,8 +337,11 @@ def main():
     print("SerialInterface setup for listening.")
 
     # Subscribe to the data topic
-    pub.subscribe(on_receive, "meshtastic.receive")
-    print("Subscribed to meshtastic.receive")
+    try:
+        pub.subscribe(on_receive, "meshtastic.receive")
+        print("Subscribed to meshtastic.receive")
+    except Exception as e:
+        print(f"Unable to subscribe: {e}")
 
     # Print the current active threads
     print("----\nAfter subscribing to meshtastic.receive, the thread information is as follows:")
@@ -307,9 +353,30 @@ def main():
         while True:
             sys.stdout.flush()
             time.sleep(1)  # Sleep to reduce CPU usage (time in seconds)
+            if (datetime.now() >= WDT + timedelta(minutes=1)):
+                WDT = datetime.now()
+                print(f"{WDT} - ERROR -- - ERROR -- - ERROR -- - ERROR --- ERROR -- - ERROR -- - ERROR -- - ERROR -- Watchdog Timer Reset")
+                increment_heard_from_node_counter("WDT ERROR")
+    # Unsubscribe from the topic if already subscribed
+                try:
+                    pub.unsubscribe(on_receive, "meshtastic.receive")
+                    print("Unsubscribed from meshtastic.receive")
+                except KeyError:
+                    print("No existing subscription to meshtastic.receive")
+                except Exception as e:
+                    print(f"ERROR: Unexpected error: {e}")
+                    pass  # Ignore unexpected errors silently
+
+                # Subscribe to the topic
+                pub.subscribe(on_receive, "meshtastic.receive")
+                print("Subscribed to meshtastic.receive")
+    
     except KeyboardInterrupt:
         print("Script terminated by user")
         local.close()
+    except Exception as e:
+        print(f"ERROR: Unexpected error: {e}")
+        pass  # Ignore unexpected errors silently
 
 
 if __name__ == "__main__":
