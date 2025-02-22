@@ -33,18 +33,19 @@ fi
 
 #
 #  Enable overlays to activate the I2C real time clock and 
-#  the shutdown/reboot switch on GPIO 3 (pin 5). If no RTC available, will throw no issues
+#  the shutdown switch on GPIO 6 (pin 31). If no RTC available, will throw no 
+#  issues. Not that the RTC will use teh I2C bus on GPIO 2 and 3 (pins 3 and 5).
 #
 
 #  check for if we have the following text prior to appending 
-overlays="\ndtoverlay=i2c-rtc,ds1307\ndtoverlay=gpio-shutdown,gpio_pin=3\n"
-overlay_no_returns="dtoverlay=i2c-rtc,ds1307\ndtoverlay=gpio-shutdown,gpio_pin=3"
+overlays="\ndtoverlay=i2c-rtc,ds1307\ndtoverlay=gpio-shutdown,gpio_pin=6\n"
+overlay_no_returns="dtoverlay=i2c-rtc,ds1307\ndtoverlay=gpio-shutdown,gpio_pin=6"
 overlays_path="/boot/firmware/config.txt"
 if ! grep -qxF "$overlay_no_returns" "$overlays_path"; then 
 	echo "setting up dtoverlay"
 	sudo echo -e "$overlays" | sudo tee -a "$overlays_path"
 else
-	echo "already enabled overlays to activate the I2C RTC and shutdown/reboot, skipping setup"
+	echo "already enabled overlays to activate the I2C RTC and shutdown, skipping setup"
 fi
 
 #
@@ -117,4 +118,4 @@ else
 fi
 
 #  The RPi takes care of insuring that this file runs only once, at setup time, and reboots the 
-# RPi after the setup is complete.
+#  RPi after the setup is complete.
