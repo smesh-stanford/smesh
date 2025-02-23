@@ -1,4 +1,4 @@
- Setup swap space to be 1G
+# Setup swap space to be 1G
 # turn off swap file such that we can change it
 #
 # Change swappiness from a default of 60 to 1to decrease swap activity to preserve the life of the SD card

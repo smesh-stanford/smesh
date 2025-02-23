@@ -5,6 +5,8 @@ sudo apt -y install git pip
 directory_name="/home/pi/Documents"
 git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
 
+# add the path that Python will be looking for
+grep "PATH" ~/.bashrc | echo "PATH=$PATH:/home/pi/.local/bin" >> ~/.bashrc
 # cd smesh/snode
 source /home/pi/.bashrc
 
