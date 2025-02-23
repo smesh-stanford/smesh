@@ -1,3 +1,0 @@
-datetime,fromNode,temperature,relativeHumidity,barometricPressure,gasResistance,iaq,windDirection,windSpeed,rxSnr,rxRssi,hopStart,hopLimit
-2024-12-18 11:18:59.241087,0x433b0b38,22.81,41.95,1022.25,,,315,,6.0,-9,5,5
-2024-12-18 11:19:17.946872,0x433bc2b0,23.002789,38.88429,1023.4325,52.20579,89,,,,,,3

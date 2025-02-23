@@ -1,2 +1,0 @@
-datetime,fromNode,batteryLevel,voltage,channelUtilization,airUtilTx,rxSnr,rxRssi,hopStart,hopLimit
-2024-12-17 17:59:38.430656,0x43590ff4,101,4.226,6.2316666,2.1055832,,,,5

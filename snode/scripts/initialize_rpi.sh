@@ -1,12 +1,14 @@
 #!/bin/bash
 
-# We expect that the name of the pi is "pi" such that this script accesses the proper directories
+# We expect that the username is "pi" such that this script accesses the proper directories
 
 # Note to self: we want to configure flashing the SD card... and perhaps that's where we can input the WiFi secrets!
 
 #  This script is appended to /boot/firstrun.sh and is run only once, at the first boot of the RPi.
 #  It sets up the RPi to run the smesh software and connect to the smesh network.
 #  https://forums.raspberrypi.com/viewtopic.php?t=320331
+#
+#  
 #
 #  Set up EE-IoT and SMesh phone hot spot SSID's.  Give them time to connect.
 #
@@ -25,6 +27,7 @@ if ! nmcli connection show | grep -q "$wifi_source_SSID"; then
 	nmcli connection modify "$wifi_source_SSID" 802-11-wireless.hidden yes
 	nmcli connection modify "$wifi_source_SSID" 802-11-wireless-security.proto rsn
 	nmcli connection modify "$wifi_source_SSID" connection.autoconnect yes
+	echo "connected to $wifi_source_SSID"
 else
 	echo "already setup $wifi_source_SSID, skipping setup"
 fi
@@ -33,8 +36,8 @@ fi
 
 #
 #  Enable overlays to activate the I2C real time clock and 
-#  the shutdown switch on GPIO 6 (pin 31). If no RTC available, will throw no 
-#  issues. Not that the RTC will use teh I2C bus on GPIO 2 and 3 (pins 3 and 5).
+#  the shutdown switch on GPIO 6 (pin 30 & 31). If no RTC available, will throw no 
+#  issues. Not that the RTC will use the I2C bus on GPIO 2 and 3 (pins 3 and 5).
 #
 
 #  check for if we have the following text prior to appending 

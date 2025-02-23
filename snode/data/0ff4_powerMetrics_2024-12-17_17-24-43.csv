@@ -1,3 +1,0 @@
-datetime,fromNode,ch3Voltage,ch3Current,rxSnr,rxRssi,hopStart,hopLimit
-2024-12-17 17:24:44.987563,0x433b0b38,4.69375,-5.0,6.25,-18,5,5
-2024-12-17 17:29:21.541547,0x433b0b38,4.6925,-3.75,6.25,-18,5,5
