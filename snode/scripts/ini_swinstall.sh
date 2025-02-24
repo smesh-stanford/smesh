@@ -2,6 +2,7 @@ sudo apt update
 sudo apt -y upgrade
 sudo apt -y install git pip network-manager screen
 
+#  This is pulling down main.  It won't pull down a development branch
 directory_name="/home/pi/Documents"
 git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
 
