@@ -5,8 +5,8 @@ sudo apt -y install git pip network-manager screen
 directory_name="/home/pi/Documents"
 git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
 
-# add the path that Python will be looking for
-grep "PATH" ~/.bashrc | echo "PATH=$PATH:/home/pi/.local/bin" >> ~/.bashrc
+# add the path that Python will be looking for.  Needs the export so we can use it in the current shell
+grep "PATH" ~/.bashrc | echo "PATH=$PATH:/home/pi/.local/bin\nexport PATH" >> ~/.bashrc
 # cd smesh/snode
 source /home/pi/.bashrc
 
