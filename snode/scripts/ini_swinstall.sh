@@ -8,9 +8,12 @@ directory_name="/home/pi/Documents"
 git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
 
 # add the path that Python will be looking for.  Needs the export so we can use it in the current shell
-grep "PATH" ~/.bashrc | echo "PATH=$PATH:/home/pi/.local/bin\nexport PATH" >> ~/.bashrc
+if ! grep "PATH" /home/pi/.bashrc 
+    echo "PATH=$PATH:/home/pi/.local/bin" >> /home/pi/.bashrc
+    echo "export PATH" >> /home/pi/.bashrc
 # cd smesh/snode
-source /home/pi/.bashrc
+    source /home/pi/.bashrc
+fi
 
 # Install the required packages 
 pip install -r /home/pi/Documents/smesh/snode/requirements.txt --break-system-packages
