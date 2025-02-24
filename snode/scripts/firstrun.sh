@@ -65,6 +65,9 @@ XKBOPTIONS=""
 KBEOF
    dpkg-reconfigure -f noninteractive keyboard-configuration
 fi
+#
+#  Add the one line below, at this line position, to /boot/firstrun.sh, in order to run the logger setup.
+source ini_logger.sh
 rm -f /boot/firstrun.sh
 sed -i 's| systemd.run.*||g' /boot/cmdline.txt
 exit 0
