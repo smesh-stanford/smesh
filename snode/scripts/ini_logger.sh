@@ -10,9 +10,9 @@ sudo chmod +x /boot/firmware/ini_swap.sh
 sudo chmod +x /boot/firmware/ini_swinstall.sh
 sudo chmod +x /boot/firmware/ini_wifi.sh
 
-sudo source /boot/firmware/ini_wifi.sh >> /boot/firmware/firstrun_ini_wifi.log 2>&1
-sudo source /boot/firmware/ini_overlays.sh >> /boot/firmware/firstrun_ini_overlays.log 2>&1
-sudo source /boot/firmware/ini_swap.sh >> /boot/firmware/firstrun_ini_swap.log 2>&1
-sudo source /boot/firmware/ini_swinstall.sh >> /boot/firmware/firstrun_ini_swinstall.log 2>&1
-sudo source /boot/firmware/ini_cron.sh >> /boot/firmware/firstrun_ini_cron.log 2>&1
-sudo source /boot/firmware/ini_hotspot.sh >> /boot/firmware/firstrun_ini_hotspot.log 2>&1
+sudo bash -c '/boot/firmware/ini_wifi.sh >> /boot/firmware/firstrun_ini_wifi.log 2>&1'
+sudo bash -c '/boot/firmware/ini_overlays.sh >> /boot/firmware/firstrun_ini_overlays.log 2>&1'
+sudo bash -c '/boot/firmware/ini_swap.sh >> /boot/firmware/firstrun_ini_swap.log 2>&1'
+sudo bash -c '/boot/firmware/ini_swinstall.sh >> /boot/firmware/firstrun_ini_swinstall.log 2>&1'
+sudo bash -c '/boot/firmware/ini_cron.sh >> /boot/firmware/firstrun_ini_cron.log 2>&1'
+sudo bash -c '/boot/firmware/ini_hotspot.sh >> /boot/firmware/firstrun_ini_hotspot.log 2>&1'
