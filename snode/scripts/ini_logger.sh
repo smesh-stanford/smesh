@@ -10,6 +10,7 @@ sudo chmod +x /boot/firmware/ini_swap.sh
 sudo chmod +x /boot/firmware/ini_swinstall.sh
 sudo chmod +x /boot/firmware/ini_wifi.sh
 
+#  Get rid of the ^m's.  This is a problem when the file is copied from Windows to Linux
 dos2ux ini_*
 
 sudo bash -c '/boot/firmware/ini_wifi.sh >> /boot/firmware/firstrun_ini_wifi.log 2>&1'
