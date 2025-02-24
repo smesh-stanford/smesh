@@ -1,6 +1,6 @@
 sudo apt update
 sudo apt -y upgrade
-sudo apt -y install git pip
+sudo apt -y install git pip network-manager screen
 
 directory_name="/home/pi/Documents"
 git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
