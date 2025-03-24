@@ -1,5 +1,0 @@
-datetime,fromNode,pm10Standard,pm25Standard,pm100Standard,pm10Environmental,pm25Environmental,pm100Environmental,rxSnr,rxRssi,hopStart,hopLimit
-2024-12-18 11:18:17.609769,0x433bc2b0,,,,,,,,,3,3
-2024-12-18 11:18:31.123259,0x336918e8,,,,,,,6.25,-16,5,5
-2024-12-18 11:18:33.682057,0x433aca0c,,,,,,,5.75,-27,3,3
-2024-12-18 11:19:17.675053,0x433bc2b0,,,,,,,,,3,3
