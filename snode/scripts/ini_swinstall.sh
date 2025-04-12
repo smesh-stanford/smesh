@@ -1,14 +1,18 @@
-sudo apt -y install git pip network-manager screen dos2ux
-sudo apt update
-sudo apt -y upgrade
+sudo apt -y install git pip network-manager screen dos2unix
+#sudo apt update
+#sudo apt -y upgrade
 
 
 #  This is pulling down main.  It won't pull down a development branch
 directory_name="/home/pi/Documents"
-git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
+
+if  ! test -f "$directory_name/smesh"; then
+	 echo "file $directory_name/smesh does not exist"
+     git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
+fi
 
 # add the path that Python will be looking for.  Needs the export so we can use it in the current shell
-if ! grep "PATH" /home/pi/.bashrc 
+if ! grep "PATH" /home/pi/.bashrc; then
     echo "PATH=$PATH:/home/pi/.local/bin" >> /home/pi/.bashrc
     echo "export PATH" >> /home/pi/.bashrc
 # cd smesh/snode
