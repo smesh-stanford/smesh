@@ -5,6 +5,7 @@ sudo apt -y install git pip network-manager screen dos2unix
 
 #  This is pulling down main.  It won't pull down a development branch
 directory_name="/home/pi/Documents"
+
 if  ! test -f "$directory_name/smesh"; then
 	 echo "file $directory_name/smesh does not exist"
      git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
