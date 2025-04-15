@@ -5,6 +5,7 @@ echo "Checking internet access to google.com ..."
 ping google.com -c 3
 
 echo "---"
+date
 echo "Current ifconfig:"
 ifconfig
 

@@ -9,6 +9,26 @@ echo "Checking internet connection..."
 ping google.com -c 3
 date
 
+# Check that the time is uptodate
+echo "---"
+echo "Checking time manager is active..."
+timedatectl status
+timedatectl show
+timedatectl
+timedatectl set-ntp true
+echo "---"
+echo "Manually setting time..."
+sudo date -s 2025-04-15T12:00:00
+date
+echo "---"
+echo "Wait 40 seconds for the time to sync if possible..."
+sleep 40
+date
+timedatectl status
+timedatectl show
+echo "---"
+
+
 # the line below is a bit scary, but it seems to be a possible solution to 
 # apt-get update error (mainly the package lists are out of date and need to 
 # be completely refreshed)
@@ -42,6 +62,7 @@ fi
 sudo -u pi pip install -r /home/pi/Documents/smesh/snode/requirements.txt --break-system-packages
 
 # Initialize the radio (if connected) as pi!
+echo "---"
 sudo -u pi python -m meshtastic --configure /home/pi/Documents/smesh/firmware/build_1_config.yaml
 
 # Check if the USB is available in devices
