@@ -18,7 +18,7 @@ sudo chmod +x /boot/firmware/ini_wifi.sh
 # dos2ux ini_*
 
 # Make the directory for the logs
-log_dir="/home/pi/firstrun_logs"
+log_dir="/home/pi/logs_firstrun"
 sudo mkdir -p $log_dir
 sudo chmod 777 $log_dir
 
@@ -32,9 +32,21 @@ sudo chmod 777 $log_dir
 #
 # We may want to run these with sudo -u pi, but for now, let's run them as root.
 # Use the directory above for the logs. 
-sudo bash -c '/boot/firmware/ini_wifi.sh | tee -a ${log_dir}/firstrun_ini_wifi.log 2>&1'
-sudo bash -c '/boot/firmware/ini_overlays.sh | tee -a ${log_dir}/firstrun_ini_overlays.log 2>&1'
-sudo bash -c '/boot/firmware/ini_swap.sh | tee -a ${log_dir}/firstrun_ini_swap.log 2>&1'
-sudo bash -c '/boot/firmware/ini_swinstall.sh | tee -a ${log_dir}/firstrun_ini_swinstall.log 2>&1'
-sudo bash -c '/boot/firmware/ini_cron.sh | tee -a ${log_dir}/firstrun_ini_cron.log 2>&1'
-sudo bash -c '/boot/firmware/ini_hotspot.sh | tee -a ${log_dir}/firstrun_ini_hotspot.log 2>&1'
+echo "WIFI INITIALIZATION"
+sudo bash -c "/boot/firmware/ini_wifi.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_wifi.log"
+echo "---"
+echo "OVERLAYS INITIALIZATION"
+sudo bash -c "/boot/firmware/ini_overlays.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_overlays.log"
+echo "---"
+echo "SWAP INITIALIZATION"
+sudo bash -c "/boot/firmware/ini_swap.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_swap.log"
+echo "---"
+echo "SOFTWARE INSTALLATION INITIALIZATION"
+sudo bash -c "/boot/firmware/ini_swinstall.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_swinstall.log"
+echo "---"
+echo "CRON INITIALIZATION"
+sudo bash -c "/boot/firmware/ini_cron.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_cron.log"
+echo "---"
+echo "HOTSPOT INITIALIZATION"
+sudo bash -c "/boot/firmware/ini_hotspot.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_hotspot.log"
+echo "SMESH LOGGER INITIALIZATION COMPLETE"

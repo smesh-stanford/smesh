@@ -12,5 +12,8 @@
 if ! sudo test -f /var/spool/cron/crontabs/pi; then echo "pi's crontab does not exist."
     echo "$(echo '@reboot source /home/pi/.bashrc; cd /home/pi/Documents/smesh/snode; mkdir -p data/; python scripts/rpi_log_script.py /dev/ttyUSB0 >> data/rpi_stdouterr.txt 2>&1' ;) " | crontab  - -u pi
 fi
-crontab -l
+echo "Root crontab:"
+sudo crontab -l
+echo "Pi crontab:"
+crontab -l -u pi
 #

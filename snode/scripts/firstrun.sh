@@ -69,7 +69,7 @@ fi
 #  Add the one line below, at this line position, to /boot/firstrun.sh, in order to run the logger setup.
 # source /boot/firmware/ini_logger.sh
 echo "[ SMesh snode initialization ] Running ini_logger.sh"
-bash /boot/firmware/ini_logger.sh | tee -a /home/pi/firstrun_ini_logger.log 2>&1
+bash /boot/firmware/ini_logger.sh 2>&1 | tee -a /home/pi/firstrun_ini_logger.log
 echo "[ SMesh snode initialization ] Finished ini_logger.sh"
 
 rm -f /boot/firstrun.sh
