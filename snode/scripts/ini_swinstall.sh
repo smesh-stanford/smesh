@@ -5,7 +5,15 @@ mkdir -p "$directory_name"
 
 # Install the necessary packages
 
-sudo apt-get -y install git pip network-manager screen dos2unix
+# the line below is a bit scary, but it seems to be a possible solution to 
+# apt-get update error (mainly the package lists are out of date and need to 
+# be completely refreshed)
+sudo rm /var/lib/apt/lists/* 
+# apt-get is the script version. using apt will not work here
+# also, update seems to be needed before install
+sudo apt-get update
+sudo apt-get -y install git pip screen
+# network-manager screen dos2unix
 #sudo apt update
 #sudo apt -y upgrade
 
@@ -26,8 +34,8 @@ if ! grep "PATH" /home/pi/.bashrc; then
     source /home/pi/.bashrc
 fi
 
-# Install the required packages 
-pip install -r /home/pi/Documents/smesh/snode/requirements.txt --break-system-packages
+# Install the required packages as pi!
+sudo -u pi pip install -r /home/pi/Documents/smesh/snode/requirements.txt --break-system-packages
 
-# Initialize the radio (if connected)
-python -m meshtastic --configure /home/pi/Documents/smesh/firmware/build_1_config.yaml
+# Initialize the radio (if connected) as pi!
+sudo -u pi python -m meshtastic --configure /home/pi/Documents/smesh/firmware/build_1_config.yaml

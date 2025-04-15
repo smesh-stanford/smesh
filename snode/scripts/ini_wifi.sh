@@ -1,5 +1,39 @@
-wifi_source_SSID="EE-IoT"
 
+# First, check if we have internet access
+echo "Checking internet access to google.com ..."
+# Only run 3 pings
+ping google.com -c 3
+
+echo "---"
+echo "Current ifconfig:"
+ifconfig
+
+# Activate the NetworkManager service over the default raspberry pi network
+echo "---"
+echo "Checking NetworkManager is in /etc/..."
+ls /etc/NetworkManager
+echo "---"
+echo "Checking NetworkManager status..."
+sudo systemctl status NetworkManager
+echo "---"
+echo "Current nmcli connections:"
+nmcli connection show
+nmcli d wifi list
+echo "---"
+echo "Activating NetworkManager service..."
+sudo systemctl enable NetworkManager
+sudo systemctl start NetworkManager
+
+
+echo "---"
+echo "Current nmcli connections:"
+nmcli connection show
+nmcli d wifi list
+
+echo "Adding wifi connections to the system"
+
+
+wifi_source_SSID="EE-IoT"
 sudo nmcli radio wifi on
 # INSERT Wifi configuration section... TODO
 if ! sudo nmcli connection show | grep -q "$wifi_source_SSID"; then

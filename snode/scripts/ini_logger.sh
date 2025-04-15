@@ -50,3 +50,7 @@ echo "---"
 echo "HOTSPOT INITIALIZATION"
 sudo bash -c "/boot/firmware/ini_hotspot.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_hotspot.log"
 echo "SMESH LOGGER INITIALIZATION COMPLETE"
+
+
+# Change the log directory back to normal permissions
+# sudo chmod 755 $log_dir
