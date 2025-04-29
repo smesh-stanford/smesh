@@ -103,7 +103,7 @@ try:
                                 anemometer_count += 1
                 curr_mag_state = new_mag_state
         
-        time.sleep(0.1) # one measurement every 0.1 seconds
+        time.sleep(0.001) # one measurement every 0.1 seconds
 
 except KeyboardInterrupt:
     print("Exiting...")
