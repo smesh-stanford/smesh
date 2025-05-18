@@ -18,4 +18,5 @@ sudo bash -c '/boot/firmware/ini_overlays.sh >> /boot/firmware/firstrun_ini_over
 sudo bash -c '/boot/firmware/ini_swap.sh >> /boot/firmware/firstrun_ini_swap.log 2>&1'
 sudo bash -c '/boot/firmware/ini_swinstall.sh >> /boot/firmware/firstrun_ini_swinstall.log 2>&1'
 sudo bash -c '/boot/firmware/ini_cron.sh >> /boot/firmware/firstrun_ini_cron.log 2>&1'
+sudo bash -c '/boot/firmware/ini_cron_wind.sh >> /boot/firmware/firstrun_ini_cron_wind.log 2>&1'
 sudo bash -c '/boot/firmware/ini_hotspot.sh >> /boot/firmware/firstrun_ini_hotspot.log 2>&1'
