@@ -4,7 +4,19 @@ SMesh is a sensor mesh network ("smesh") that performs long duration environment
 
 A smesh node (or "snode") consists of a sensor payload plus a Meshtastic board that can relay readings using long range LoRa radio.
 
-# Customizing Meshtastic firmware
+# Documentation
+Refer to the following documentation for what best suites your needs based on the table below!
+| Purpose                                                | Relevant File                                    |
+| ------------------------------------------------------ | ------------------------------------------------ |
+| System architecture. A good starter to SMesh software! | [architecture.md](documentation/architecture.md) |
+| Firmware documentation. Refer to our fork of the Meshtastic firmware repo (TODO)   | 
+
+# Firmware
+The firmware is necessary for interfacing with the sensors attached to our Meshtastic. Examples may include the wind sensor, BME, or PMSA sensors.
+
+To handle the firmware, we have forked the [Meshtastic firmware repo]()
+
+## Customizing Meshtastic firmware
 ___
 Snodes run a stable version of Meshtastic firmware with small modifications.
 
@@ -12,7 +24,6 @@ To access this firmware:
 1. Clone the firmware fork, i.e. `git clone https://github.com/josdo/meshtastic-firmware.git`
 2. Follow https://meshtastic.org/docs/development/firmware/build/ to set up PlatformIO, a tool to build firmware from source. 
    **Note:** at step 3, pick `heltec-v3` from the list of options given.
-
 # SMesh - Raspberry Pi Setup Guide
 ___
 
