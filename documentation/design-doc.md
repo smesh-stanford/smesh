@@ -60,7 +60,7 @@ A controlled burn can be broken into 3 phases: preparation, execution, and compl
     - TBD
 
 ## System Diagram Draft
-![alt text](image.png)
+![alt text](images/system-diagram.png)
 
 ## Further Reading
 - [smesh.info](http://smesh.info)
