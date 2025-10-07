@@ -1,0 +1,3 @@
+[submodule "smesh-firmware"]
+	path = smesh-firmware
+	url = git@github.com:smesh-stanford/smesh-firmware.git
