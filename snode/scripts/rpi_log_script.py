@@ -380,7 +380,13 @@ def main():
                     pass  # Ignore unexpected errors silently
 
                 # close the old connection if it was being used
-                local.close()
+                try:
+                    local.close()
+                    print("closed old ttyUSB connection")
+                except Exception as e:
+                    print(f"Ignored close() error: {e}")
+
+                time.sleep(2)  # Give OS time to release /dev/ttyUSB0
 
                 # ensure we have a tty connection prior to subscribing again
                 local = setup_meshtastic_connection(serial_port)
