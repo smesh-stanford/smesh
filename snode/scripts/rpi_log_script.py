@@ -316,6 +316,10 @@ def setup_meshtastic_connection(serial_port):
         else:
             print(f"Error: The path '{serial_port}' does not exist. Retrying connection")
             time.sleep(10)
+    
+    local = SerialInterface(serial_port)
+    print("SerialInterface setup for listening.")
+    return local
 
 ################################################
 # Main Function
@@ -341,10 +345,7 @@ def main():
 
     # try to setup meshtastic connection. This will automatically retry every 
     # 10 seconds if it fails
-    setup_meshtastic_connection(serial_port)
-
-    local = SerialInterface(serial_port)
-    print("SerialInterface setup for listening.")
+    local = setup_meshtastic_connection(serial_port)
 
     # Subscribe to the data topic
     try:
@@ -379,7 +380,7 @@ def main():
                     pass  # Ignore unexpected errors silently
 
                 # ensure we have a tty connection prior to subscribing again
-                setup_meshtastic_connection(serial_port)
+                local = setup_meshtastic_connection(serial_port)
 
                 # Subscribe to the topic
                 pub.subscribe(on_receive, "meshtastic.receive")
