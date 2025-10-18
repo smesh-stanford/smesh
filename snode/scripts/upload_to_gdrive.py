@@ -30,10 +30,11 @@ def upload_files(folder_path, drive_folder_id=None):
 
             file_path = os.path.join(folder_path, filename)
 
+            print(f"cur file_path {file_path}")
             if os.path.isfile(file_path):
 
                 print(f"Trying to upload for {file_path}")
-                
+
                 # Build the query to search for existing files
                 query = f"mimeType != 'application/vnd.google-apps.folder' and name = '{filename}' and trashed = false"
                 if drive_folder_id:
