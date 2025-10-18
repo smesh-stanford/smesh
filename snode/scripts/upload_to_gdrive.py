@@ -81,7 +81,7 @@ if __name__ == '__main__':
 
     # Optionally, specify the Google Drive folder ID where you want to upload the files
     # If you leave drive_folder_id as None, files will be uploaded to the root directory
-    drive_folder_id = "1W3gRqD1Szc4eqjIz9ESWps5qM-8NQ2Qj"  # Replace with your folder ID if needed
+    drive_folder_id = "13E62bL_auwAmuIFAQLVoc6MlOeNJkU7h"  # Replace with your folder ID if needed
 
     upload_files(folder_to_upload, drive_folder_id)
 
