@@ -328,10 +328,14 @@ def main():
 
     serial_port = sys.argv[1]
 
-    if os.path.exists(serial_port):
-        print(f"Serial port set to: {serial_port}")
-    else:
-        print(f"Error: The path '{serial_port}' does not exist.")
+    # Retry every 10 seconds to make connection to Meshtastic if it fails
+    while (True):
+        if os.path.exists(serial_port):
+            print(f"Serial port set to: {serial_port}")
+            break
+        else:
+            print(f"Error: The path '{serial_port}' does not exist.")
+            time.sleep(10)
 
     local = SerialInterface(serial_port)
     print("SerialInterface setup for listening.")
