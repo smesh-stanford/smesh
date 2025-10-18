@@ -21,7 +21,7 @@ def upload_files(folder_path, drive_folder_id=None):
     for node in os.listdir(folder_path):
         print(f"Writing data for node {node}")
 
-        for filename in os.listdir(folder_path/node):
+        for filename in os.listdir(f"{folder_path}/{node}"):
             if filename.endswith(".txt"):
                 continue
             file_path = os.path.join(folder_path, filename)
