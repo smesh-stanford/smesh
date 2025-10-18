@@ -3,6 +3,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 import datetime
+import re
 
 # Define the Google Drive API scopes and service account file path
 SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -48,10 +49,35 @@ def upload_files(folder_path, drive_folder_id=None):
                 service.files().create(body=file_metadata, media_body=media, fields='id').execute()
                 print(f'{filename} uploaded successfully.')
 
+def get_latest_data_folder(base_path):
+    """
+    Find the most recent folder in base_path matching pattern: data-YYYY-MM-DD_HH-MM-SS
+    """
+    folder_pattern = re.compile(r"^data-\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}$")
+    
+    folders = [
+        f for f in os.listdir(base_path)
+        if os.path.isdir(os.path.join(base_path, f)) and folder_pattern.match(f)
+    ]
+    
+    if not folders:
+        raise FileNotFoundError("No matching data folders found")
+
+    # Sort by datetime parsed from the folder name
+    latest_folder = max(
+        folders,
+        key=lambda name: datetime.datetime.strptime(name, "data-%Y-%m-%d_%H-%M-%S")
+    )
+    
+    return os.path.join(base_path, latest_folder)
+
 if __name__ == '__main__':
     print(f'[{datetime.datetime.now()}] STARTING UPLOAD PYTHON SCRIPT.')
-    # Replace 'your/local/folder/path' with the path to your local folder
-    folder_to_upload = '/home/pi/smesh/snode/data' # Replace with the path to your data folder
+
+    # simply select the latest folder
+    base_path = "/home/pi/Documents/smesh/snode"
+    folder_to_upload = get_latest_data_folder(base_path)
+    print(f"[{datetime.datetime.now()}] Latest folder: {folder_to_upload}")
 
     # Optionally, specify the Google Drive folder ID where you want to upload the files
     # If you leave drive_folder_id as None, files will be uploaded to the root directory
