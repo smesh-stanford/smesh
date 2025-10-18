@@ -334,7 +334,7 @@ def main():
             print(f"Serial port set to: {serial_port}")
             break
         else:
-            print(f"Error: The path '{serial_port}' does not exist.")
+            print(f"Error: The path '{serial_port}' does not exist. Retrying connection")
             time.sleep(10)
 
     local = SerialInterface(serial_port)
