@@ -21,11 +21,19 @@ def upload_files(folder_path, drive_folder_id=None):
     for node in os.listdir(folder_path):
         print(f"Writing data for node {node}")
 
-        for filename in os.listdir(f"{folder_path}/{node}"):
+        node_file_path = os.path.join(folder_path, node)
+        for filename in os.listdir(node_file_path):
+            print(f"Checking for filename {filename}")
+
             if filename.endswith(".txt"):
                 continue
+
             file_path = os.path.join(folder_path, filename)
+
             if os.path.isfile(file_path):
+
+                print(f"Trying to upload for {file_path}")
+                
                 # Build the query to search for existing files
                 query = f"mimeType != 'application/vnd.google-apps.folder' and name = '{filename}' and trashed = false"
                 if drive_folder_id:
