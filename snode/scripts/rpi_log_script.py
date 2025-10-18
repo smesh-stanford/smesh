@@ -306,6 +306,21 @@ def on_receive(packet, interface):
     print("-"*30, "\n")     # Separate packets more visibly
 
 
+# Retry every 10 seconds to make connection to Meshtastic if it fails
+# Checks for the TTYUSB availability from pi <> meshtastic
+def setup_meshtastic_connection(serial_port):
+    while (True):
+        if os.path.exists(serial_port):
+            print(f"Serial port set to: {serial_port}")
+            break
+        else:
+            print(f"Error: The path '{serial_port}' does not exist. Retrying connection")
+            time.sleep(10)
+    
+    local = SerialInterface(serial_port)
+    print("SerialInterface setup for listening.")
+    return local
+
 ################################################
 # Main Function
 ################################################
@@ -328,13 +343,9 @@ def main():
 
     serial_port = sys.argv[1]
 
-    if os.path.exists(serial_port):
-        print(f"Serial port set to: {serial_port}")
-    else:
-        print(f"Error: The path '{serial_port}' does not exist.")
-
-    local = SerialInterface(serial_port)
-    print("SerialInterface setup for listening.")
+    # try to setup meshtastic connection. This will automatically retry every 
+    # 10 seconds if it fails
+    local = setup_meshtastic_connection(serial_port)
 
     # Subscribe to the data topic
     try:
@@ -353,11 +364,12 @@ def main():
         while True:
             sys.stdout.flush()
             time.sleep(1)  # Sleep to reduce CPU usage (time in seconds)
-            if (datetime.now() >= WDT + timedelta(minutes=1)):
+            if (datetime.now() >= WDT + timedelta(minutes=1, seconds=10)):
                 WDT = datetime.now()
                 print(f"{WDT} - ERROR -- - ERROR -- - ERROR -- - ERROR --- ERROR -- - ERROR -- - ERROR -- - ERROR -- Watchdog Timer Reset")
                 increment_heard_from_node_counter("WDT ERROR")
-    # Unsubscribe from the topic if already subscribed
+
+                # Unsubscribe from the topic if already subscribed
                 try:
                     pub.unsubscribe(on_receive, "meshtastic.receive")
                     print("Unsubscribed from meshtastic.receive")
@@ -367,8 +379,21 @@ def main():
                     print(f"ERROR: Unexpected error: {e}")
                     pass  # Ignore unexpected errors silently
 
+                # close the old connection if it was being used
+                try:
+                    local.close()
+                    print("closed old ttyUSB connection")
+                except Exception as e:
+                    print(f"Ignored close() error: {e}")
+
+                time.sleep(2)  # Give OS time to release dev tty port
+
+                # ensure we have a tty connection prior to subscribing again
+                local = setup_meshtastic_connection(serial_port)
+
                 # Subscribe to the topic
                 pub.subscribe(on_receive, "meshtastic.receive")
+
                 print("Subscribed to meshtastic.receive")
     
     except KeyboardInterrupt:
