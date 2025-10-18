@@ -20,7 +20,7 @@ def upload_files(folder_path, drive_folder_id=None):
 
     # If drive_folder_id is None, upload to the root directory.
     for filename in os.listdir(folder_path):
-        print("current filename {filename}")
+        print(f"current filename {filename}")
         if filename.endswith(".txt"):
             continue
         file_path = os.path.join(folder_path, filename)
