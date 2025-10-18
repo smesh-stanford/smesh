@@ -10,8 +10,7 @@
 #    f. Redirect the standard output and error to a file in the data directory
 # 3. Verify that the command has been added successfully
 if ! sudo test -f /var/spool/cron/crontabs/pi; then echo "pi's crontab does not exist."
-    echo "$(echo '@reboot source /home/pi/.bashrc; cd /home/pi/Documents/smesh/snode; mkdir -p data/; python scripts/rpi_log_script.py /dev/ttyUSB0 >> data/rpi_stdouterr.txt 2>&1' ;) " | crontab  - -u pi
-    echo "$(echo '@reboot nmcli con up accesspoint' ;) " | crontab  - -u pi
+    echo "$(echo '@reboot source /home/pi/.bashrc; cd /home/pi/Documents/smesh/snode; mkdir -p data/; nmcli con up accesspoint; python scripts/rpi_log_script.py /dev/ttyUSB0 >> data/rpi_stdouterr.txt 2>&1' ;) " | crontab  - -u pi
 fi
 echo "Root crontab:"
 sudo crontab -l
