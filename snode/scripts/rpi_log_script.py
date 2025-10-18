@@ -364,7 +364,7 @@ def main():
         while True:
             sys.stdout.flush()
             time.sleep(1)  # Sleep to reduce CPU usage (time in seconds)
-            if (datetime.now() >= WDT + timedelta(minutes=1)):
+            if (datetime.now() >= WDT + timedelta(minutes=1, seconds=10)):
                 WDT = datetime.now()
                 print(f"{WDT} - ERROR -- - ERROR -- - ERROR -- - ERROR --- ERROR -- - ERROR -- - ERROR -- - ERROR -- Watchdog Timer Reset")
                 increment_heard_from_node_counter("WDT ERROR")
@@ -378,6 +378,9 @@ def main():
                 except Exception as e:
                     print(f"ERROR: Unexpected error: {e}")
                     pass  # Ignore unexpected errors silently
+
+                # close the old connection if it was being used
+                local.close()
 
                 # ensure we have a tty connection prior to subscribing again
                 local = setup_meshtastic_connection(serial_port)
