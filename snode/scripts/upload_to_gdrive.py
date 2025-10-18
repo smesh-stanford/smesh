@@ -7,7 +7,7 @@ import re
 
 # Define the Google Drive API scopes and service account file path
 SCOPES = ['https://www.googleapis.com/auth/drive']
-SERVICE_ACCOUNT_FILE = "/home/pi/smesh/snode/credentials.json" # Replace with the path to your service account file
+SERVICE_ACCOUNT_FILE = "/home/pi/Documents/smesh/snode/credentials.json" # Replace with the path to your service account file
 
 # Create credentials using the service account file
 credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
