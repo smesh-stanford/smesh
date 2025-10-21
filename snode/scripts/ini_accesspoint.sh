@@ -7,7 +7,7 @@ echo "Current ifconfig:"
 ifconfig
 
 # desired wifi accesspoint name
-wifi_ap="INSERT" # CHANGE THIS PER PI
+wifi_ap="smesh_{INSERT}" # CHANGE THIS PER PI
 if ! nmcli d wifi list | grep -q "$wifi_ap"; then
 	# The first if catches when we are already connected to the wifi accesspoint
 	if ! nmcli connection show | grep -q "accesspoint"; then
