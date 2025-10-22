@@ -1,7 +1,7 @@
 
 # First, set up the directory
 directory_name="/home/pi/Documents"
-mkdir -p "$directory_name"
+sudo -u pi mkdir -p "$directory_name"
 
 # Install the necessary packages
 echo "---"
@@ -46,7 +46,7 @@ sudo apt-get -y install git pip screen
 
 if  ! test -f "$directory_name/smesh"; then
 	 echo "file $directory_name/smesh does not exist yet"
-     git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
+     sudo -u pi git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name/smesh"
      echo "cloned smesh repo"
 fi
 
