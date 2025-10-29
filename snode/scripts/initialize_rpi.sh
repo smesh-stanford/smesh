@@ -86,7 +86,24 @@ fi
 
 sudo apt update
 sudo apt -y upgrade
-sudo apt -y install git pip
+
+# Install Python 3.10 and set as default
+sudo apt -y install software-properties-common
+sudo add-apt-repository -y ppa:deadsnakes/ppa
+sudo apt update
+sudo apt -y install python3.10 python3.10-venv python3.10-dev python3.10-distutils
+sudo apt -y install git
+
+# Install pip for Python 3.10
+curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.10
+
+# Set Python 3.10 as the default python3 and python commands system-wide
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 100
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 100
+
+# Make pip3 point to Python 3.10's pip
+sudo update-alternatives --install /usr/bin/pip3 pip3 /usr/local/bin/pip3.10 100
+sudo update-alternatives --install /usr/bin/pip pip /usr/local/bin/pip3.10 100
 
 directory_name="/home/pi/Documents"
 git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name"
@@ -94,13 +111,13 @@ git clone "https://github.com/smesh-stanford/smesh.git" "$directory_name"
 # cd smesh/snode
 source /home/pi/.bashrc
 
-# Install the required packages 
+# Install the required packages (will use Python 3.10 by default)
 pip install -r /home/pi/Documents/smesh/snode/requirements.txt --break-system-packages
 
-# Initialize the radio (if connected)
+# Initialize the radio (if connected) (will use Python 3.10 by default)
 python -m meshtastic --configure /home/pi/Documents/smesh/firmware/build_1_config.yaml
 
-# Set up the logger script, which will run automatically each time the RPi boots
+# Set up the logger script, which will run automatically each time the RPi boots (will use Python 3.10 by default)
 echo "$(echo '@reboot source /home/pi/.bashrc; cd /home/pi/Documents/smesh/snode; python scripts/rpi_logger.py /dev/ttyUSB0 >> data/rpi_stdouterr.txt 2>&1' ;) " | crontab  -
 crontab -l
 #

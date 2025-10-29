@@ -8,7 +8,7 @@
 # 777 gives rwx to all users.
 sudo chmod +x /boot/firmware/ini_cron.sh
 sudo chmod 777 /boot/firmware/ini_cron.sh
-sudo chmod +x /boot/firmware/ini_hotspot.sh
+sudo chmod +x /boot/firmware/ini_accesspoint.sh
 sudo chmod +x /boot/firmware/ini_overlays.sh
 sudo chmod +x /boot/firmware/ini_swap.sh
 sudo chmod +x /boot/firmware/ini_swinstall.sh
@@ -28,7 +28,7 @@ sudo chmod 777 $log_dir
 # 3. ini_swap.sh: (Swap) Needed for space for software installation
 # 4. ini_swinstall.sh: (Software Install) Needed for running cron & logger
 # 5. ini_cron.sh: (Run logger at boot)
-# 6. ini_hotspot.sh: (Hotspot) Needed for connecting to the pi without a network
+# 6. ini_accesspoint.sh: (Access Point) Needed for connecting to the pi without a network
 #
 # We may want to run these with sudo -u pi, but for now, let's run them as root.
 # Use the directory above for the logs. 
@@ -47,8 +47,8 @@ echo "---"
 echo "CRON INITIALIZATION"
 sudo bash -c "/boot/firmware/ini_cron.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_cron.log"
 echo "---"
-echo "HOTSPOT INITIALIZATION"
-sudo bash -c "/boot/firmware/ini_hotspot.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_hotspot.log"
+echo "ACCESS POINT INITIALIZATION"
+sudo bash -c "/boot/firmware/ini_accesspoint.sh 2>&1 | tee -a ${log_dir}/firstrun_ini_accesspoint.log"
 echo "SMESH LOGGER INITIALIZATION COMPLETE"
 
 

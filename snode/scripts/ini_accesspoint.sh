@@ -7,14 +7,14 @@ echo "Current ifconfig:"
 ifconfig
 
 # desired wifi accesspoint name
-wifi_ap="smesh_{INSERT}" # CHANGE THIS PER PI
+wifi_ap="smesh_6" # CHANGE THIS PER PI
 if ! nmcli d wifi list | grep -q "$wifi_ap"; then
 	# The first if catches when we are already connected to the wifi accesspoint
 	if ! nmcli connection show | grep -q "accesspoint"; then
 		# The second if catches when we are not connected to the wifi accesspoint
 		sudo nmcli con add type wifi ifname wlan0 mode ap con-name 'accesspoint' ssid "$wifi_ap" autoconnect true
 		# CHANGE THE IP ADDRESS PER PI
-		sudo nmcli con modify 'accesspoint' 802-11-wireless.band bg ipv4.method shared ipv4.address 192.1{INSERT}8.6.1/24
+		sudo nmcli con modify 'accesspoint' 802-11-wireless.band bg ipv4.method shared ipv4.address 192.168.8.6.1/24
 		sudo nmcli con modify 'accesspoint' ipv6.method disabled
 		sudo nmcli con modify 'accesspoint' wifi-sec.key-mgmt wpa-psk
 		sudo nmcli con modify 'accesspoint' wifi-sec.psk "smesh1234"
