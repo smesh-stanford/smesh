@@ -36,7 +36,24 @@ sudo rm -vrf /var/lib/apt/lists/*
 # apt-get is the script version. using apt will not work here
 # also, update seems to be needed before install
 sudo apt-get update
-sudo apt-get -y install git pip screen
+
+# Install Python 3.10 and required packages
+sudo apt-get -y install software-properties-common
+sudo add-apt-repository -y ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get -y install python3.10 python3.10-venv python3.10-dev python3.10-distutils
+sudo apt-get -y install git screen
+
+# Install pip for Python 3.10
+curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.10
+
+# Set Python 3.10 as the default python3 and python commands system-wide
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 100
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 100
+
+# Make pip3 point to Python 3.10's pip
+sudo update-alternatives --install /usr/bin/pip3 pip3 /usr/local/bin/pip3.10 100
+sudo update-alternatives --install /usr/bin/pip pip /usr/local/bin/pip3.10 100
 # sudo apt-get -y install network-manager screen dos2unix
 #sudo apt update
 #sudo apt -y upgrade
@@ -54,14 +71,24 @@ fi
 if ! grep "PATH" /home/pi/.bashrc; then
     echo "PATH=$PATH:/home/pi/.local/bin" >> /home/pi/.bashrc
     echo "export PATH" >> /home/pi/.bashrc
-# cd smesh/snode
-    source /home/pi/.bashrc
 fi
 
-# Install the required packages as pi!
+# Ensure Python 3.10 is used by default for the pi user
+if ! grep "alias python=" /home/pi/.bashrc; then
+    echo "# Use Python 3.10 as default" >> /home/pi/.bashrc
+    echo "alias python=python3.10" >> /home/pi/.bashrc
+    echo "alias python3=python3.10" >> /home/pi/.bashrc
+    echo "alias pip=pip3.10" >> /home/pi/.bashrc
+    echo "alias pip3=pip3.10" >> /home/pi/.bashrc
+fi
+
+# Source the updated bashrc
+source /home/pi/.bashrc
+
+# Install the required packages as pi (will use Python 3.10 by default)!
 sudo -u pi pip install -r /home/pi/Documents/smesh/snode/requirements.txt --break-system-packages
 
-# Initialize the radio (if connected) as pi!
+# Initialize the radio (if connected) as pi (will use Python 3.10 by default)!
 echo "---"
 sudo -u pi python -m meshtastic --configure /home/pi/Documents/smesh/firmware/build_1_config.yaml
 

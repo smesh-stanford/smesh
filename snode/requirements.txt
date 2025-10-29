@@ -1,5 +1,5 @@
 pytap2==2.3.0
-meshtastic
+meshtastic==2.3.14
 google-auth
 google-auth-oauthlib
 google-api-python-client
