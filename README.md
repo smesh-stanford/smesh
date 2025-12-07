@@ -9,7 +9,11 @@ ___
 Snodes run a stable version of Meshtastic firmware with small modifications.
 
 To access this firmware:
-1. Clone the firmware fork, i.e. `git clone https://github.com/josdo/meshtastic-firmware.git`
+1. The firmware is created from a fork off of the [meshtastic open-source firmware](https://github.com/meshtastic/firmware#). The fork is imported as a submodule and includes our own modifications to the meshtastic firmware to fit our needs. You can install this module by doing:
+```
+git submodule update --init --recursive
+```
+
 2. Follow https://meshtastic.org/docs/development/firmware/build/ to set up PlatformIO, a tool to build firmware from source. 
    **Note:** at step 3, pick `heltec-v3` from the list of options given.
 
